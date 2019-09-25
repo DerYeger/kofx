@@ -1,20 +1,18 @@
 package eu.yeger.kotlin.javafx
 
-import org.junit.Assert
 import org.junit.Test
+import org.testfx.assertions.api.Assertions.assertThat
 import org.testfx.framework.junit.ApplicationTest
 
 class LabelTests : ApplicationTest() {
 
     @Test
     fun testLabelWithoutText() {
-        val label = label()
-        Assert.assertEquals("", label.text)
+        assertThat(label()).hasText("Label")
     }
 
     @Test
     fun testLabelWithText() {
-        val label = button("Hello")
-        Assert.assertEquals("Hello", label.text)
+        assertThat(label("Hello")).hasText("Hello")
     }
 }

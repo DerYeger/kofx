@@ -1,37 +1,33 @@
 package eu.yeger.kotlin.javafx
 
-import javafx.event.ActionEvent
-import javafx.event.EventHandler
-import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import org.testfx.assertions.api.Assertions.assertThat
 import org.testfx.framework.junit.ApplicationTest
 
 class ButtonTests : ApplicationTest() {
 
     @Test
     fun testButtonWithoutText() {
-        val myButton = button()
-        assertEquals("", myButton.text)
+        assertThat(button()).hasText("Button")
     }
 
     @Test
     fun testButtonWithText() {
-        val myButton = button("Hello")
-        assertEquals("Hello", myButton.text)
+        assertThat(button("Hello")).hasText("Hello")
     }
 
     @Test
     fun testButtonWithInitializer() {
         var handled = false
-        val myButton = button {
-            text = "Hello"
+        val button = button {
+            text = "Test"
             setOnAction {
                 handled = true
             }
-
         }
-        myButton.onAction.handle(null)
+        assertThat(button).hasText("Test")
+        button.onAction.handle(null)
         assertTrue(handled)
     }
 }
