@@ -7,7 +7,8 @@ plugins {
 group 'eu.yeger'
 version '0.0.1'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 12
+targetCompatibility = 12
 
 repositories {
     mavenCentral()
@@ -22,10 +23,10 @@ dependencies {
 }
 
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "12"
 }
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "12"
 }
 
 javafx {
