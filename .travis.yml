@@ -1,0 +1,9 @@
+anguage: java
+install: true
+
+os: linux
+dist: trusty
+jdk: openjdk12
+
+script:
+  - ./gradlew build --scan -s
