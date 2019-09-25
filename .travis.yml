@@ -1,4 +1,4 @@
-anguage: java
+language: java
 install: true
 
 os: linux
@@ -8,5 +8,6 @@ jdk: openjdk12
 before_install:
   - chmod +x gradlew
   - chmod +x gradle/wrapper/gradle-wrapper.jar
+
 script:
   - ./gradlew build --scan -s
