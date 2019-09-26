@@ -21,7 +21,6 @@ class AlertTests : ApplicationTest() {
                 informationAlert {
                     text = "InformationAlertTest"
                     onConfirm {
-                        fail<String>("Did click")
                         confirmed = true
                         this@informationAlert.hide()
                     }
@@ -30,7 +29,7 @@ class AlertTests : ApplicationTest() {
             WaitForAsyncUtils.waitForFxEvents()
             assertThat(lookup("InformationAlertTest").queryLabeled()).isNotNull
             clickOn(lookup("Confirm").queryButton())
-            println("Also testing")
+            assertTrue(confirmed)
         }
     }
 
