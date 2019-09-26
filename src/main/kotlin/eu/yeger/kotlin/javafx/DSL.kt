@@ -9,7 +9,7 @@ import javafx.scene.Scene
 annotation class FXDSL
 
 open class ViewBuilder {
-    var root: Node? = null
+    lateinit var root: Node
 }
 
 inline fun view(init: @FXDSL ViewBuilder.() -> Node) =
