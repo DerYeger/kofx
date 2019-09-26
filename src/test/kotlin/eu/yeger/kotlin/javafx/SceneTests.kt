@@ -1,18 +1,15 @@
 package eu.yeger.kotlin.javafx
 
 import javafx.beans.property.SimpleIntegerProperty
-import javafx.scene.control.Button
-import javafx.scene.control.Label
 import javafx.stage.Stage
 import org.junit.jupiter.api.Test
 import org.testfx.assertions.api.Assertions.assertThat
 import org.testfx.framework.junit5.ApplicationTest
-import org.testfx.util.WaitForAsyncUtils
 
 class SceneTests : ApplicationTest() {
 
     private fun SimpleIntegerProperty.increment() {
-        this.value = this.value + 1
+        value += 1
     }
 
     private class ExampleContextWithCounter {
