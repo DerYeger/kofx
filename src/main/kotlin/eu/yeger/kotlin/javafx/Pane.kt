@@ -27,6 +27,10 @@ inline fun Pane.hBox(init: @FXDSL HBox.() -> Unit = {}) =
 inline fun Pane.vBox(init: @FXDSL VBox.() -> Unit = {}): VBox =
     VBox().apply(init).also { children.add(it) }
 
-infix fun Pane.child(child: Node) {
+infix fun Pane.withChild(child: Node) {
     children.add(child)
+}
+
+fun <T: Node> Pane.include(fragment: Fragment<T>) {
+    children.add(fragment.root)
 }

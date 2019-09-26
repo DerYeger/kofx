@@ -20,8 +20,8 @@ class ConfirmationAlert : Alert() {
                 alignment = Pos.CENTER_RIGHT
                 padding = Insets(10.0)
                 spacing = 10.0
-                child(confirmButton)
-                child(cancelButton)
+                withChild(confirmButton)
+                withChild(cancelButton)
             }
         }
     }

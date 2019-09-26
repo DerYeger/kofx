@@ -18,31 +18,31 @@ class ViewsTests : ApplicationTest() {
 
         @Test
         fun testButtonWithoutText() {
-            val button = view {
+            val button = fragment<Button> {
                 button()
-            } as Button
+            }.root
             assertThat(button).hasText("Button")
         }
 
         @Test
         fun testButtonWithText() {
-            val button = view {
+            val button = fragment<Button> {
                 button("Hello")
-            } as Button
+            }.root
             assertThat(button).hasText("Hello")
         }
 
         @Test
         fun testButtonWithInitializer() {
             var handled = false
-            val button = view {
+            val button = fragment<Button> {
                 button {
                     text = "Test"
                     setOnAction {
                         handled = true
                     }
                 }
-            } as Button
+            }.root
             assertThat(button).hasText("Test")
             button.onAction.handle(null)
             assertTrue(handled)
@@ -54,17 +54,17 @@ class ViewsTests : ApplicationTest() {
 
         @Test
         fun testLabelWithoutText() {
-            val label = view {
+            val label = fragment<Label> {
                 label()
-            } as Label
+            }.root
             assertThat(label).hasText("Label")
         }
 
         @Test
         fun testLabelWithText() {
-            val label = view {
+            val label = fragment<Label> {
                 label("Hello")
-            } as Label
+            }.root
             assertThat(label).hasText("Hello")
         }
     }
@@ -74,12 +74,12 @@ class ViewsTests : ApplicationTest() {
 
         @Test
         fun testVBoxWithButtonChildren() {
-            val vBox = view {
+            val vBox = fragment<VBox> {
                 vBox {
                     label("First")
                     button("Second")
                 }
-            } as VBox
+            }.root
             assertThat(vBox).hasExactlyNumChildren(2)
             assertEquals("First", (vBox.children[0] as Label).text)
             assertEquals("Second", (vBox.children[1] as Button).text)
@@ -91,12 +91,12 @@ class ViewsTests : ApplicationTest() {
 
         @Test
         fun testHBoxWithButtonChildren() {
-            val hBox = view {
+            val hBox = fragment<HBox> {
                 hBox {
                     label("First")
                     button("Second")
                 }
-            } as HBox
+            }.root
             assertThat(hBox).hasExactlyNumChildren(2)
             assertEquals("First", (hBox.children[0] as Label).text)
             assertEquals("Second", (hBox.children[1] as Button).text)

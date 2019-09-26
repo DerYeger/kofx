@@ -8,14 +8,10 @@ import javafx.scene.Scene
 @Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE)
 annotation class FXDSL
 
-open class View {
-    lateinit var root: Node
+open class Fragment<out T: Node>(initializer: @FXDSL Fragment<T>.() -> T) {
+    val root = initializer()
 }
 
-inline fun view(init: @FXDSL View.() -> Node) =
-    View().apply { root = init() }.root
+fun <T: Node> fragment(init: @FXDSL Fragment<T>.() -> T) = Fragment<T>(init)
 
-inline fun scene(init: @FXDSL View.() -> Parent) =
-    Scene(View().apply { root = init() }.root as Parent)
-
-
+fun scene(init: @FXDSL Fragment<Parent>.() -> Parent) = Scene(Fragment(init).root)

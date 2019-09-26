@@ -24,7 +24,9 @@ class SceneTests : ApplicationTest() {
                     textProperty().bind(context.clickCounter.asString())
                 }
                 button("My Button") {
-                    setOnAction { context.clickCounter.increment() }
+                    setOnAction {
+                        context.clickCounter.increment()
+                    }
                 }
             }
         }

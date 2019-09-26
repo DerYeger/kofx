@@ -15,7 +15,7 @@ class InformationAlert : Alert() {
             padding = Insets(10.0)
             spacing = 10.0
             label(text)
-            child(confirmButton)
+            withChild(confirmButton)
         }
     }
 }
