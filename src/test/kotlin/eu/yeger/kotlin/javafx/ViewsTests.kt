@@ -18,7 +18,7 @@ class ViewsTests : ApplicationTest() {
 
         @Test
         fun testButtonWithoutText() {
-            val button = view(this) {
+            val button = view {
                 button()
             } as Button
             assertThat(button).hasText("Button")
@@ -26,7 +26,7 @@ class ViewsTests : ApplicationTest() {
 
         @Test
         fun testButtonWithText() {
-            val button = view(this) {
+            val button = view {
                 button("Hello")
             } as Button
             assertThat(button).hasText("Hello")
@@ -35,7 +35,7 @@ class ViewsTests : ApplicationTest() {
         @Test
         fun testButtonWithInitializer() {
             var handled = false
-            val button = view(this) {
+            val button = view {
                 button {
                     text = "Test"
                     setOnAction {
@@ -54,7 +54,7 @@ class ViewsTests : ApplicationTest() {
 
         @Test
         fun testLabelWithoutText() {
-            val label = view(this) {
+            val label = view {
                 label()
             } as Label
             assertThat(label).hasText("Label")
@@ -62,7 +62,7 @@ class ViewsTests : ApplicationTest() {
 
         @Test
         fun testLabelWithText() {
-            val label = view(this) {
+            val label = view {
                 label("Hello")
             } as Label
             assertThat(label).hasText("Hello")
@@ -74,7 +74,7 @@ class ViewsTests : ApplicationTest() {
 
         @Test
         fun testVBoxWithButtonChildren() {
-            val vBox = view(this) {
+            val vBox = view {
                 vBox {
                     label("First")
                     button("Second")
@@ -91,7 +91,7 @@ class ViewsTests : ApplicationTest() {
 
         @Test
         fun testHBoxWithButtonChildren() {
-            val hBox = view(this) {
+            val hBox = view {
                 hBox {
                     label("First")
                     button("Second")
@@ -108,7 +108,7 @@ class ViewsTests : ApplicationTest() {
 
         @Test
         fun testSimpleScene() {
-            val root = scene(this) {
+            val root = scene {
                 hBox {
                     label("First")
                     button("Second")

@@ -8,14 +8,14 @@ import javafx.scene.Scene
 @Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE)
 annotation class FXDSL
 
-open class ViewBuilder<T>(val context: T) {
+open class ViewBuilder {
     var root: Node? = null
 }
 
-inline fun <T> view(context: T, init: @FXDSL ViewBuilder<T>.() -> Node) =
-    ViewBuilder(context).apply { root = init() }.root
+inline fun view(init: @FXDSL ViewBuilder.() -> Node) =
+    ViewBuilder().apply { root = init() }.root
 
-inline fun <T> scene(context: T, init: @FXDSL ViewBuilder<T>.() -> Parent) =
-    Scene(ViewBuilder(context).apply { root = init() }.root as Parent)
+inline fun scene(init: @FXDSL ViewBuilder.() -> Parent) =
+    Scene(ViewBuilder().apply { root = init() }.root as Parent)
 
 

@@ -17,13 +17,14 @@ class SceneTests : ApplicationTest() {
     }
 
     override fun start(primaryStage: Stage) {
-        val scene = scene(ExampleContextWithCounter()) {
+        val context = ExampleContextWithCounter()
+        val scene = scene {
             vBox {
                 label {
-                    textProperty().bind(this@scene.context.clickCounter.asString())
+                    textProperty().bind(context.clickCounter.asString())
                 }
                 button("My Button") {
-                    setOnAction { this@scene.context.clickCounter.increment() }
+                    setOnAction { context.clickCounter.increment() }
                 }
             }
         }
