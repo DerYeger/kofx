@@ -1,6 +1,7 @@
 package eu.yeger.kotlin.javafx.alert
 
 import javafx.application.Platform
+import org.assertj.core.api.Fail.fail
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -20,8 +21,8 @@ class AlertTests : ApplicationTest() {
                 informationAlert {
                     text = "InformationAlertTest"
                     onConfirm {
+                        fail<String>("Did click")
                         confirmed = true
-                        println("Testing")
                         this@informationAlert.hide()
                     }
                 }
@@ -30,7 +31,6 @@ class AlertTests : ApplicationTest() {
             assertThat(lookup("InformationAlertTest").queryLabeled()).isNotNull
             clickOn(lookup("Confirm").queryButton())
             println("Also testing")
-            assertTrue(confirmed)
         }
     }
 
