@@ -29,6 +29,7 @@ class AlertTests : ApplicationTest() {
             WaitForAsyncUtils.waitForFxEvents()
             assertThat(lookup("InformationAlertTest").queryLabeled()).isNotNull
             clickOn(lookup("Confirm").queryButton())
+            println("Also testing")
             assertTrue(confirmed)
         }
     }
