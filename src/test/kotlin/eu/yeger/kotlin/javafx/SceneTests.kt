@@ -1,7 +1,11 @@
 package eu.yeger.kotlin.javafx
 
 import javafx.beans.property.SimpleIntegerProperty
+import javafx.scene.control.Button
+import javafx.scene.control.Label
+import javafx.scene.layout.HBox
 import javafx.stage.Stage
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.testfx.assertions.api.Assertions.assertThat
 import org.testfx.framework.junit5.ApplicationTest
@@ -45,5 +49,18 @@ class SceneTests : ApplicationTest() {
         assertThat(label).hasText("0")
         clickOn(lookup("My Button").queryButton())
         assertThat(label).hasText("1")
+    }
+
+    @Test
+    fun testSimpleScene() {
+        val root = scene {
+            hBox {
+                label("First")
+                button("Second")
+            }
+        }.root as HBox
+        assertThat(root).hasExactlyNumChildren(2)
+        Assertions.assertEquals("First", (root.children[0] as Label).text)
+        Assertions.assertEquals("Second", (root.children[1] as Button).text)
     }
 }

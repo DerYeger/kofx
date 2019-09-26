@@ -20,7 +20,7 @@ class ViewsTests : ApplicationTest() {
         fun testButtonWithoutText() {
             val button = fragment<Button> {
                 button()
-            }.root
+            }.instance()
             assertThat(button).hasText("Button")
         }
 
@@ -28,7 +28,7 @@ class ViewsTests : ApplicationTest() {
         fun testButtonWithText() {
             val button = fragment<Button> {
                 button("Hello")
-            }.root
+            }.instance()
             assertThat(button).hasText("Hello")
         }
 
@@ -42,7 +42,7 @@ class ViewsTests : ApplicationTest() {
                         handled = true
                     }
                 }
-            }.root
+            }.instance()
             assertThat(button).hasText("Test")
             button.onAction.handle(null)
             assertTrue(handled)
@@ -56,7 +56,7 @@ class ViewsTests : ApplicationTest() {
         fun testLabelWithoutText() {
             val label = fragment<Label> {
                 label()
-            }.root
+            }.instance()
             assertThat(label).hasText("Label")
         }
 
@@ -64,7 +64,7 @@ class ViewsTests : ApplicationTest() {
         fun testLabelWithText() {
             val label = fragment<Label> {
                 label("Hello")
-            }.root
+            }.instance()
             assertThat(label).hasText("Hello")
         }
     }
@@ -79,7 +79,7 @@ class ViewsTests : ApplicationTest() {
                     label("First")
                     button("Second")
                 }
-            }.root
+            }.instance()
             assertThat(vBox).hasExactlyNumChildren(2)
             assertEquals("First", (vBox.children[0] as Label).text)
             assertEquals("Second", (vBox.children[1] as Button).text)
@@ -96,27 +96,10 @@ class ViewsTests : ApplicationTest() {
                     label("First")
                     button("Second")
                 }
-            }.root
+            }.instance()
             assertThat(hBox).hasExactlyNumChildren(2)
             assertEquals("First", (hBox.children[0] as Label).text)
             assertEquals("Second", (hBox.children[1] as Button).text)
-        }
-    }
-
-    @Nested
-    inner class SceneTests {
-
-        @Test
-        fun testSimpleScene() {
-            val root = scene {
-                hBox {
-                    label("First")
-                    button("Second")
-                }
-            }.root as HBox
-            assertThat(root).hasExactlyNumChildren(2)
-            assertEquals("First", (root.children[0] as Label).text)
-            assertEquals("Second", (root.children[1] as Button).text)
         }
     }
 }

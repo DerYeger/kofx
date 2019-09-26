@@ -32,5 +32,5 @@ infix fun Pane.withChild(child: Node) {
 }
 
 fun <T: Node> Pane.include(fragment: Fragment<T>) {
-    children.add(fragment.root)
+    children.add(fragment.instance())
 }
