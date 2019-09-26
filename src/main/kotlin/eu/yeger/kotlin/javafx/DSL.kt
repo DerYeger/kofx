@@ -12,6 +12,6 @@ open class Fragment<out T: Node>(initializer: @FXDSL Fragment<T>.() -> T) {
     val root = initializer()
 }
 
-fun <T: Node> fragment(init: @FXDSL Fragment<T>.() -> T) = Fragment<T>(init)
+fun <T: Node> fragment(init: @FXDSL Fragment<T>.() -> T) = Fragment(init)
 
 fun scene(init: @FXDSL Fragment<Parent>.() -> Parent) = Scene(Fragment(init).root)
