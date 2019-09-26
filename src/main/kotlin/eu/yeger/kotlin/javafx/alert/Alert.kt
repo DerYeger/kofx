@@ -26,8 +26,3 @@ abstract class Alert {
         stage?.close()
     }
 }
-
-abstract class ButtonAlert : Alert()
-
-inline fun ButtonAlert.button(text: String = "Confirm", init: @FXDSL Button.() -> Unit = {}) =
-    Button(text).apply(init)

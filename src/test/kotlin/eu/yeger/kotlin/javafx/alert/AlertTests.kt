@@ -16,18 +16,15 @@ class AlertTests : ApplicationTest() {
             informationAlert {
                 title = "TestAlert"
                 text = "AlertText"
-                confirmButton = button("ConfirmButton") {
-                    setOnAction {
+                confirmButton.setOnAction {
                         confirmed = true
                         this@informationAlert.hide()
-                    }
                 }
             }
         }
         WaitForAsyncUtils.waitForFxEvents()
-        assertThat(lookup("AlertText").queryLabeled())
-        clickOn(lookup("ConfirmButton").queryButton())
-        WaitForAsyncUtils.waitForFxEvents()
+        assertThat(lookup("AlertText").queryLabeled()).isNotNull
+        clickOn(lookup("Confirm").queryButton())
         assertTrue(confirmed)
     }
 }

@@ -5,9 +5,9 @@ import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.Button
 
-class ConfirmationAlert : ButtonAlert() {
-    lateinit var confirmButton: Button
-    lateinit var cancelButton: Button
+class ConfirmationAlert : Alert() {
+    val confirmButton = Button("Confirm")
+    val cancelButton = Button("Cancel")
 
     override fun build() = scene {
         vBox {

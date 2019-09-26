@@ -8,8 +8,8 @@ import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.Button
 
-class InformationAlert : ButtonAlert() {
-    lateinit var confirmButton: Button
+class InformationAlert : Alert() {
+    val confirmButton = Button("Confirm")
 
     override fun build() = scene {
         vBox {
