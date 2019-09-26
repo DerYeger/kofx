@@ -9,22 +9,22 @@ import javafx.scene.layout.HBox
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
 
-inline fun Pane.button(text: String = "Button", init: @FXDSL Button.() -> Unit = {}) =
+inline fun Pane.button(text: String = "Button", init: @FXMarker Button.() -> Unit = {}) =
     Button(text).apply(init).also { children.add(it) }
 
-inline fun Pane.label(text: String = "Label", init: @FXDSL Label.() -> Unit = {}) =
+inline fun Pane.label(text: String = "Label", init: @FXMarker Label.() -> Unit = {}) =
     Label(text).apply(init).also { children.add(it) }
 
-inline fun Pane.textField(init: @FXDSL TextField.() -> Unit = {}) =
+inline fun Pane.textField(init: @FXMarker TextField.() -> Unit = {}) =
     TextField().apply(init).also { children.add(it) }
 
-inline fun Pane.passwordField(init: @FXDSL PasswordField.() -> Unit = {}) =
+inline fun Pane.passwordField(init: @FXMarker PasswordField.() -> Unit = {}) =
     PasswordField().apply(init).also { children.add(it) }
 
-inline fun Pane.hBox(init: @FXDSL HBox.() -> Unit = {}) =
+inline fun Pane.hBox(init: @FXMarker HBox.() -> Unit = {}) =
     HBox().apply(init).also { children.add(it) }
 
-inline fun Pane.vBox(init: @FXDSL VBox.() -> Unit = {}): VBox =
+inline fun Pane.vBox(init: @FXMarker VBox.() -> Unit = {}): VBox =
     VBox().apply(init).also { children.add(it) }
 
 infix fun Pane.withChild(child: Node) {

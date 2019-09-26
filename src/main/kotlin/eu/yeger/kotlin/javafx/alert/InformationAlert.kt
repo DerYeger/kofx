@@ -24,6 +24,6 @@ inline fun InformationAlert.onConfirm(crossinline block: (ActionEvent) -> Unit) 
     confirmButton.setOnAction { block(it) }
 }
 
-fun informationAlert(init: @FXDSL InformationAlert.() -> Unit) {
+fun informationAlert(init: @FXMarker InformationAlert.() -> Unit) {
     InformationAlert().apply(init).show()
 }

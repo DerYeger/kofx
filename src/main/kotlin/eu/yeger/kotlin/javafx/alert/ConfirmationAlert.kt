@@ -35,6 +35,6 @@ inline fun ConfirmationAlert.onCancel(crossinline block: (ActionEvent) -> Unit) 
     cancelButton.setOnAction { block(it) }
 }
 
-fun confirmationAlert(init: @FXDSL ConfirmationAlert.() -> Unit) {
+fun confirmationAlert(init: @FXMarker ConfirmationAlert.() -> Unit) {
     ConfirmationAlert().apply(init).show()
 }
