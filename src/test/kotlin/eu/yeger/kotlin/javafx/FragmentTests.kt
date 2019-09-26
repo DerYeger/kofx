@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 import org.testfx.assertions.api.Assertions.assertThat
 import org.testfx.framework.junit5.ApplicationTest
 
-class ViewsTests : ApplicationTest() {
+class FragmentTests : ApplicationTest() {
 
     @Nested
     inner class ButtonTests {
