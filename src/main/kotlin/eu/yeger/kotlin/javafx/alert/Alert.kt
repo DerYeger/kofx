@@ -16,6 +16,7 @@ abstract class Alert {
             scene = build()
             title = this@Alert.title
             sizeToScene()
+            isResizable = false
             toFront()
             show()
         }
