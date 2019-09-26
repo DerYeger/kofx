@@ -1,8 +1,13 @@
 package eu.yeger.kotlin.javafx
 
 import javafx.beans.property.SimpleIntegerProperty
+import javafx.scene.control.Button
+import javafx.scene.control.Label
 import javafx.stage.Stage
+import org.junit.jupiter.api.Test
+import org.testfx.assertions.api.Assertions.assertThat
 import org.testfx.framework.junit5.ApplicationTest
+import org.testfx.util.WaitForAsyncUtils
 
 class SceneTests : ApplicationTest() {
 
@@ -32,5 +37,13 @@ class SceneTests : ApplicationTest() {
             minHeight = height
             minWidth = width
         }.show()
+    }
+
+    @Test
+    fun testClickCounter() {
+        val label = lookup("0").queryLabeled()
+        assertThat(label).hasText("0")
+        clickOn(lookup("My Button").queryButton())
+        assertThat(label).hasText("1")
     }
 }
