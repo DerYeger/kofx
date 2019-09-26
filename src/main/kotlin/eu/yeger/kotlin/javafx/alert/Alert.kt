@@ -16,8 +16,8 @@ abstract class Alert {
             scene = build()
             title = this@Alert.title
             sizeToScene()
-            show()
             toFront()
+            show()
         }
     }
 
