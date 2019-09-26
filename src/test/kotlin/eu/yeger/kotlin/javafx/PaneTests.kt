@@ -2,6 +2,7 @@ package eu.yeger.kotlin.javafx
 
 import javafx.scene.control.Button
 import javafx.scene.layout.VBox
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.testfx.assertions.api.Assertions.assertThat
@@ -19,7 +20,14 @@ class PaneTests : ApplicationTest() {
                 include(singleButtonFragment)
             }
         }
-        assertTrue(singleButtonFragment.root in container.root.children)
-        assertThat(container.root).hasExactlyNumChildren(1)
+        val anotherContainer = fragment<VBox> {
+            vBox {
+                include(singleButtonFragment)
+            }
+        }
+        assertFalse(singleButtonFragment.root in container.root.children)
+        assertTrue(singleButtonFragment.root in anotherContainer.root.children)
+        assertThat(container.root).hasExactlyNumChildren(0)
+        assertThat(anotherContainer.root).hasExactlyNumChildren(1)
     }
 }
