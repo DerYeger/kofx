@@ -2,6 +2,7 @@ package eu.yeger.kotlin.javafx.alert
 
 import javafx.application.Platform
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.testfx.assertions.api.Assertions.assertThat
 import org.testfx.framework.junit5.ApplicationTest
@@ -9,22 +10,69 @@ import org.testfx.util.WaitForAsyncUtils
 
 class AlertTests : ApplicationTest() {
 
-    @Test
-    fun testInformationAlert() {
-        var confirmed = false
-        Platform.runLater {
-            informationAlert {
-                title = "TestAlert"
-                text = "AlertText"
-                confirmButton.setOnAction {
+    @Nested
+    inner class InformationAlertTests {
+
+        @Test
+        fun testConfirmButtonClicked() {
+            var confirmed = false
+            Platform.runLater {
+                informationAlert {
+                    text = "InformationAlertTest"
+                    confirmButton.setOnAction {
                         confirmed = true
                         this@informationAlert.hide()
+                    }
                 }
             }
+            WaitForAsyncUtils.waitForFxEvents()
+            assertThat(lookup("InformationAlertTest").queryLabeled()).isNotNull
+            clickOn(lookup("Confirm").queryButton())
+            assertTrue(confirmed)
         }
-        WaitForAsyncUtils.waitForFxEvents()
-        assertThat(lookup("AlertText").queryLabeled()).isNotNull
-        clickOn(lookup("Confirm").queryButton())
-        assertTrue(confirmed)
     }
+
+    @Nested
+    inner class ConfirmationAlertTests {
+
+        @Test
+        fun testConfirmButtonClicked() {
+            var confirmed = false
+            Platform.runLater {
+                confirmationAlert {
+                    text = "ConfirmationAlertTest"
+                    confirmButton.setOnAction {
+                        confirmed = true
+                        this@confirmationAlert.hide()
+                    }
+                }
+            }
+            WaitForAsyncUtils.waitForFxEvents()
+            assertThat(lookup("ConfirmationAlertTest").queryLabeled()).isNotNull
+            clickOn(lookup("Confirm").queryButton())
+            assertTrue(confirmed)
+        }
+
+        @Test
+        fun testCancelButtonClicked() {
+            var confirmed = false
+            Platform.runLater {
+                confirmationAlert {
+                    text = "ConfirmationAlertTest"
+                    cancelButton.apply {
+                        text = "CustomText"
+                        setOnAction {
+                            confirmed = true
+                            this@confirmationAlert.hide()
+                        }
+                    }
+                }
+            }
+            WaitForAsyncUtils.waitForFxEvents()
+            assertThat(lookup("ConfirmationAlertTest").queryLabeled()).isNotNull
+            clickOn(lookup("CustomText").queryButton())
+            assertTrue(confirmed)
+        }
+    }
+
 }

@@ -1,13 +1,11 @@
 package eu.yeger.kotlin.javafx.alert
 
-import eu.yeger.kotlin.javafx.FXDSL
 import javafx.scene.Scene
-import javafx.scene.control.Button
 import javafx.stage.Stage
 
 abstract class Alert {
     var title = "Alert"
-    lateinit var text: String
+    var text = ""
 
     abstract fun build(): Scene
 
@@ -16,9 +14,10 @@ abstract class Alert {
     fun show() {
         stage = Stage().apply {
             scene = build()
-            this.title = title
+            title = this@Alert.title
             sizeToScene()
             show()
+            toFront()
         }
     }
 
