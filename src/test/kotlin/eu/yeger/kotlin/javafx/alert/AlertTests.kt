@@ -21,6 +21,7 @@ class AlertTests : ApplicationTest() {
                     text = "InformationAlertTest"
                     onConfirm {
                         confirmed = true
+                        println("Testing")
                         this@informationAlert.hide()
                     }
                 }
