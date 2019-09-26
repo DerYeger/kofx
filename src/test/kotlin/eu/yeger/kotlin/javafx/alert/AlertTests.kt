@@ -1,6 +1,7 @@
 package eu.yeger.kotlin.javafx.alert
 
 import javafx.application.Platform
+import javafx.scene.input.KeyCode
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -19,7 +20,7 @@ class AlertTests : ApplicationTest() {
             Platform.runLater {
                 informationAlert {
                     text = "InformationAlertTest"
-                    confirmButton.setOnAction {
+                    onConfirm {
                         confirmed = true
                         this@informationAlert.hide()
                     }
@@ -41,7 +42,7 @@ class AlertTests : ApplicationTest() {
             Platform.runLater {
                 confirmationAlert {
                     text = "ConfirmationAlertTest"
-                    confirmButton.setOnAction {
+                    onConfirm {
                         confirmed = true
                         this@confirmationAlert.hide()
                     }
@@ -61,7 +62,7 @@ class AlertTests : ApplicationTest() {
                     text = "ConfirmationAlertTest"
                     cancelButton.apply {
                         text = "CustomText"
-                        setOnAction {
+                        onCancel {
                             confirmed = true
                             this@confirmationAlert.hide()
                         }

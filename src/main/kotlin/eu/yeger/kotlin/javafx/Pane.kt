@@ -1,5 +1,6 @@
 package eu.yeger.kotlin.javafx
 
+import javafx.scene.Node
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.PasswordField
@@ -25,3 +26,7 @@ inline fun Pane.hBox(init: @FXDSL HBox.() -> Unit = {}) =
 
 inline fun Pane.vBox(init: @FXDSL VBox.() -> Unit = {}): VBox =
     VBox().apply(init).also { children.add(it) }
+
+infix fun Pane.child(child: Node) {
+    children.add(child)
+}
