@@ -10,13 +10,13 @@ import org.testfx.framework.junit5.ApplicationTest
 class NodeTests : ApplicationTest() {
 
     @Test
-    fun testInclude() {
+    fun testMultipleInstanceCreations() {
         val singleButtonFragment = button("IncludedButton")
         val container = vBox {
-            include(singleButtonFragment)
+            withChild { singleButtonFragment }
         }.instance()
         val anotherContainer = vBox {
-            include(singleButtonFragment)
+            withChild { singleButtonFragment }
         }.instance()
         assertThat(container.children[0] as Button).hasText("IncludedButton")
         assertThat(anotherContainer.children[0] as Button).hasText("IncludedButton")
