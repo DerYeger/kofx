@@ -10,8 +10,8 @@ infix fun <T: Pane, U: Node> T.withChild(block: @FXMarker FragmentScope.() -> Fr
 fun <T: Pane, U: Node> T.include(fragment: Fragment<U>) =
     fragment.instance().also { children.add(it) }
 
-inline fun <U: Node> GridPane.withChild(column: Int, row: Int, block: () -> Fragment<U>): U =
-    block().instance().also { add(it, column, row) }
+fun <U: Node> GridPane.withChild(column: Int, row: Int, block: @FXMarker FragmentScope.() -> Fragment<U>): U =
+    FragmentScope.fragment(block).instance().also { add(it, column, row) }
 
 fun <T: GridPane, U: Node> T.include(column: Int, row: Int, fragment: Fragment<U>) =
     fragment.instance().also { add(it, column, row) }
