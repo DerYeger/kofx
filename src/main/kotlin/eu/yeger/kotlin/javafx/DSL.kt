@@ -7,4 +7,4 @@ import javafx.scene.Scene
 @Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE)
 annotation class FXMarker
 
-fun scene(init: @FXMarker Fragment<in Parent>.() -> Parent) = Scene(Fragment(init).instance())
+fun scene(init: () -> Fragment<out Parent>) = Scene(init().instance())

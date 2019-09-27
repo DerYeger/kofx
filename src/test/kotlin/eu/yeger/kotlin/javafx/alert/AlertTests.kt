@@ -1,7 +1,6 @@
 package eu.yeger.kotlin.javafx.alert
 
 import javafx.application.Platform
-import org.assertj.core.api.Fail.fail
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test

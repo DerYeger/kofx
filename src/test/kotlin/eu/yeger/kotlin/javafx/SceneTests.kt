@@ -24,12 +24,16 @@ class SceneTests : ApplicationTest() {
         val context = ExampleContextWithCounter()
         val scene = scene {
             vBox {
-                label {
-                    textProperty().bind(context.clickCounter.asString())
+                withChild {
+                    label {
+                        textProperty().bind(context.clickCounter.asString())
+                    }
                 }
-                button("My Button") {
-                    setOnAction {
-                        context.clickCounter.increment()
+                withChild {
+                    button("My Button") {
+                        setOnAction {
+                            context.clickCounter.increment()
+                        }
                     }
                 }
             }
@@ -55,8 +59,8 @@ class SceneTests : ApplicationTest() {
     fun testSimpleScene() {
         val root = scene {
             hBox {
-                label("First")
-                button("Second")
+                withChild { label("First") }
+                withChild { button("Second") }
             }
         }.root as HBox
         assertThat(root).hasExactlyNumChildren(2)

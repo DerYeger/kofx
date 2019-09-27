@@ -2,6 +2,9 @@ package eu.yeger.kotlin.javafx
 
 import javafx.scene.control.Button
 import javafx.scene.control.Label
+import javafx.scene.control.PasswordField
+import javafx.scene.control.TextField
+import javafx.scene.layout.GridPane
 import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -18,29 +21,23 @@ class FragmentTests : ApplicationTest() {
 
         @Test
         fun testButtonWithoutText() {
-            val button = fragment<Button> {
-                button()
-            }.instance()
+            val button = button().instance()
             assertThat(button).hasText("Button")
         }
 
         @Test
         fun testButtonWithText() {
-            val button = fragment<Button> {
-                button("Hello")
-            }.instance()
+            val button = button("Hello").instance()
             assertThat(button).hasText("Hello")
         }
 
         @Test
         fun testButtonWithInitializer() {
             var handled = false
-            val button = fragment<Button> {
-                button {
-                    text = "Test"
-                    setOnAction {
-                        handled = true
-                    }
+            val button = button {
+                text = "Test"
+                setOnAction {
+                    handled = true
                 }
             }.instance()
             assertThat(button).hasText("Test")
@@ -54,18 +51,38 @@ class FragmentTests : ApplicationTest() {
 
         @Test
         fun testLabelWithoutText() {
-            val label = fragment<Label> {
-                label()
-            }.instance()
+            val label = label().instance()
             assertThat(label).hasText("Label")
         }
 
         @Test
         fun testLabelWithText() {
-            val label = fragment<Label> {
-                label("Hello")
-            }.instance()
+            val label = label("Hello").instance()
             assertThat(label).hasText("Hello")
+        }
+    }
+
+    @Nested
+    inner class TextFieldTests {
+
+        @Test
+        fun testTextField() {
+            val textField = textField {
+                text = "This is a test"
+            }.instance()
+            assertThat(textField).hasText("This is a test")
+        }
+    }
+
+    @Nested
+    inner class PasswordFieldTests {
+
+        @Test
+        fun testTextField() {
+            val passwordField = passwordField {
+                text = "12345"
+            }.instance()
+            assertThat(passwordField).hasText("12345")
         }
     }
 
@@ -74,15 +91,13 @@ class FragmentTests : ApplicationTest() {
 
         @Test
         fun testVBoxWithButtonChildren() {
-            val vBox = fragment<VBox> {
-                vBox {
-                    label("First")
-                    button("Second")
-                }
+            val vBox = vBox {
+                withChild { label("First") }
+                withChild { button("Second") }
             }.instance()
             assertThat(vBox).hasExactlyNumChildren(2)
-            assertEquals("First", (vBox.children[0] as Label).text)
-            assertEquals("Second", (vBox.children[1] as Button).text)
+            assertThat(vBox.children[0] as Label).hasText("First")
+            assertThat(vBox.children[1] as Button).hasText("Second")
         }
     }
 
@@ -91,15 +106,28 @@ class FragmentTests : ApplicationTest() {
 
         @Test
         fun testHBoxWithButtonChildren() {
-            val hBox = fragment<HBox> {
-                hBox {
-                    label("First")
-                    button("Second")
-                }
+            val hBox = hBox {
+                withChild { label("First") }
+                withChild { button("Second") }
             }.instance()
             assertThat(hBox).hasExactlyNumChildren(2)
-            assertEquals("First", (hBox.children[0] as Label).text)
-            assertEquals("Second", (hBox.children[1] as Button).text)
+            assertThat(hBox.children[0] as Label).hasText("First")
+            assertThat(hBox.children[1] as Button).hasText("Second")
+        }
+    }
+
+    @Nested
+    inner class GridPaneTests {
+
+        @Test
+        fun testGridPaneWithIndices() {
+            val gridPane = gridPane {
+                withChild { label("First") }
+                withChild { button("Second") }
+            }.instance()
+            assertThat(gridPane).hasExactlyNumChildren(2)
+            assertThat(gridPane.children[0] as Label).hasText("First")
+            assertThat(gridPane.children[1] as Button).hasText("Second")
         }
     }
 }

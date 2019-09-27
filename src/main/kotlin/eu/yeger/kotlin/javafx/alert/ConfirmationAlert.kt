@@ -15,13 +15,15 @@ class ConfirmationAlert : Alert() {
             alignment = Pos.CENTER_RIGHT
             padding = Insets(10.0)
             spacing = 10.0
-            label(text)
-            hBox {
-                alignment = Pos.CENTER_RIGHT
-                padding = Insets(10.0)
-                spacing = 10.0
-                withChild(confirmButton)
-                withChild(cancelButton)
+            withChild { label(text) }
+            withChild {
+                hBox {
+                    alignment = Pos.CENTER_RIGHT
+                    padding = Insets(10.0)
+                    spacing = 10.0
+                    withChild { confirmButton.wrapped() }
+                    withChild { cancelButton.wrapped() }
+                }
             }
         }
     }
