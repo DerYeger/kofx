@@ -4,11 +4,8 @@ import javafx.scene.Node
 import javafx.scene.layout.GridPane
 import javafx.scene.layout.Pane
 
-inline infix fun <T: Pane, U: Node> T.withChild(block: () -> Fragment<U>): U =
-    block().instance().also { children.add(it) }
-
-//infix fun <T: Pane, U: Node> T.withChild(child: U): U =
-//    child.also { children.add(it) }
+infix fun <T: Pane, U: Node> T.withChild(block: @FXMarker FragmentScope.() -> Fragment<U>): U =
+    FragmentScope.fragment(block).instance().also { children.add(it) }
 
 fun <T: Pane, U: Node> T.include(fragment: Fragment<U>) =
     fragment.instance().also { children.add(it) }
