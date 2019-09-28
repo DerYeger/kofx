@@ -5,10 +5,12 @@ import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
+import javafx.scene.image.ImageView
 import javafx.scene.layout.GridPane
 import javafx.scene.layout.HBox
 import javafx.scene.layout.StackPane
 import javafx.scene.layout.VBox
+import javafx.scene.shape.Rectangle
 
 open class Fragment<T: Node>(private val builder: () -> T) {
     fun instance() = builder()
@@ -27,6 +29,12 @@ inline fun textField(crossinline init: @FXMarker TextField.() -> Unit = {}) =
 
 inline fun passwordField(crossinline init: @FXMarker PasswordField.() -> Unit = {}) =
     Fragment { PasswordField().apply(init) }
+
+inline fun imageView(crossinline init: @FXMarker ImageView.() -> Unit = {}) =
+    Fragment { ImageView().apply(init) }
+
+inline fun rectangle(crossinline init: @FXMarker Rectangle.() -> Unit = {}) =
+    Fragment { Rectangle().apply(init) }
 
 inline fun hBox(crossinline init: @FXMarker HBox.() -> Unit = {}) =
     Fragment { HBox().apply(init) }
