@@ -13,10 +13,10 @@ class NodeTests : ApplicationTest() {
     fun testMultipleInstanceCreations() {
         val singleButtonFragment = button("IncludedButton")
         val container = vBox {
-            withChild { singleButtonFragment }
+            child { singleButtonFragment }
         }.instance()
         val anotherContainer = vBox {
-            withChild { singleButtonFragment }
+            child { singleButtonFragment }
         }.instance()
         assertThat(container.children[0] as Button).hasText("IncludedButton")
         assertThat(anotherContainer.children[0] as Button).hasText("IncludedButton")
@@ -28,10 +28,10 @@ class NodeTests : ApplicationTest() {
         @Test
         fun testAddingChildrenWithCoordinates() {
             val gridPane = gridPane {
-                withChild(0, 0) {
+                child(0, 0) {
                     label("First")
                 }
-                withChild(1, 1) {
+                child(1, 1) {
                     button("Second")
                 }
             }.instance()

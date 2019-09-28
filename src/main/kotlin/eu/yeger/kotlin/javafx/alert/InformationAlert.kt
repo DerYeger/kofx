@@ -16,8 +16,8 @@ class InformationAlert : Alert() {
                 alignment = Pos.CENTER_RIGHT
                 padding = Insets(10.0)
                 spacing = 10.0
-                withChild { label(text) }
-                withChild { confirmButton.wrapped() }
+                child { label(text) }
+                child { confirmButton.wrapped() }
             }
         }
     }

@@ -7,6 +7,7 @@ import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.scene.layout.GridPane
 import javafx.scene.layout.HBox
+import javafx.scene.layout.StackPane
 import javafx.scene.layout.VBox
 
 open class Fragment<T: Node>(private val builder: () -> T) {
@@ -35,3 +36,6 @@ inline fun vBox(crossinline init: @FXMarker VBox.() -> Unit = {}) =
 
 inline fun gridPane(crossinline init: @FXMarker GridPane.() -> Unit = {}) =
     Fragment { GridPane().apply(init) }
+
+inline fun stackPane(crossinline init: @FXMarker StackPane.() -> Unit = {}) =
+    Fragment { StackPane().apply(init) }

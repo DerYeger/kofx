@@ -2,12 +2,6 @@ package eu.yeger.kotlin.javafx
 
 import javafx.scene.control.Button
 import javafx.scene.control.Label
-import javafx.scene.control.PasswordField
-import javafx.scene.control.TextField
-import javafx.scene.layout.GridPane
-import javafx.scene.layout.HBox
-import javafx.scene.layout.VBox
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -92,8 +86,8 @@ class FragmentTests : ApplicationTest() {
         @Test
         fun testVBoxWithButtonChildren() {
             val vBox = vBox {
-                withChild { label("First") }
-                withChild { button("Second") }
+                child { label("First") }
+                child { button("Second") }
             }.instance()
             assertThat(vBox).hasExactlyNumChildren(2)
             assertThat(vBox.children[0] as Label).hasText("First")
@@ -107,8 +101,8 @@ class FragmentTests : ApplicationTest() {
         @Test
         fun testHBoxWithButtonChildren() {
             val hBox = hBox {
-                withChild { label("First") }
-                withChild { button("Second") }
+                child { label("First") }
+                child { button("Second") }
             }.instance()
             assertThat(hBox).hasExactlyNumChildren(2)
             assertThat(hBox.children[0] as Label).hasText("First")
@@ -122,12 +116,27 @@ class FragmentTests : ApplicationTest() {
         @Test
         fun testGridPaneWithIndices() {
             val gridPane = gridPane {
-                withChild { label("First") }
-                withChild { button("Second") }
+                child { label("First") }
+                child { button("Second") }
             }.instance()
             assertThat(gridPane).hasExactlyNumChildren(2)
             assertThat(gridPane.children[0] as Label).hasText("First")
             assertThat(gridPane.children[1] as Button).hasText("Second")
+        }
+    }
+
+    @Nested
+    inner class StackPaneTests {
+
+        @Test
+        fun testStackPaneWithIndices() {
+            val stackPane = stackPane {
+                child { label("First") }
+                child { button("Second") }
+            }.instance()
+            assertThat(stackPane).hasExactlyNumChildren(2)
+            assertThat(stackPane.children[0] as Label).hasText("First")
+            assertThat(stackPane.children[1] as Button).hasText("Second")
         }
     }
 }
