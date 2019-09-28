@@ -14,6 +14,10 @@ class Delegate<T>(private val property: Property<T>) {
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T = this.property.value
 }
 
+fun BooleanProperty.flip() {
+    this.value = this.value.not()
+}
+
 fun BooleanProperty.delegation() = BooleanDelegate(this)
 
 class BooleanDelegate(private val property: BooleanProperty) {
