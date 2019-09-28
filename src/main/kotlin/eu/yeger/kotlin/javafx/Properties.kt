@@ -3,32 +3,68 @@ package eu.yeger.kotlin.javafx
 import javafx.beans.property.*
 import kotlin.reflect.KProperty
 
-operator fun <T> Property<T>.setValue(thisRef: Any?, property: KProperty<*>, value: T) {
-    this.value = value
+fun <T> Property<T>.delegation() = Delegate(this)
+
+class Delegate<T>(private val property: Property<T>) {
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
+        this.property.value = value
+    }
+
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): T = this.property.value
 }
 
-operator fun <T> Property<T>.getValue(thisRef: Any?, property: KProperty<*>): T = value
+fun BooleanProperty.delegation() = BooleanDelegate(this)
 
-operator fun IntegerProperty.setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
-    this.value = value
+class BooleanDelegate(private val property: BooleanProperty) {
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Boolean) {
+        this.property.value = value
+    }
+
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): Boolean = this.property.value
 }
 
-operator fun IntegerProperty.getValue(thisRef: Any?, property: KProperty<*>): Int = value
+fun IntegerProperty.delegation() = IntegerDelegate(this)
 
-operator fun LongProperty.setValue(thisRef: Any?, property: KProperty<*>, value: Long) {
-    this.value = value
+class IntegerDelegate(private val property: IntegerProperty) {
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
+        this.property.value = value
+    }
+
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): Int = this.property.value
 }
 
-operator fun LongProperty.getValue(thisRef: Any?, property: KProperty<*>): Long = value
+fun LongProperty.delegation() = LongDelegate(this)
 
-operator fun DoubleProperty.setValue(thisRef: Any?, property: KProperty<*>, value: Double) {
-    this.value = value
+class LongDelegate(private val property: LongProperty) {
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value:  Long) {
+        this.property.value = value
+    }
+
+    operator fun getValue(thisRef: Any?, property: KProperty<*>):  Long = this.property.value
 }
 
-operator fun DoubleProperty.getValue(thisRef: Any?, property: KProperty<*>): Double = value
+fun DoubleProperty.delegation() = DoubleDelegate(this)
 
-operator fun FloatProperty.setValue(thisRef: Any?, property: KProperty<*>, value: Float) {
-    this.value = value
+class DoubleDelegate(private val property: DoubleProperty) {
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value:  Double) {
+        this.property.value = value
+    }
+
+    operator fun getValue(thisRef: Any?, property: KProperty<*>):  Double = this.property.value
 }
 
-operator fun FloatProperty.getValue(thisRef: Any?, property: KProperty<*>): Float = value
+fun FloatProperty.delegation() = FloatDelegate(this)
+
+class FloatDelegate(private val property: FloatProperty) {
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value:  Float) {
+        this.property.value = value
+    }
+
+    operator fun getValue(thisRef: Any?, property: KProperty<*>):  Float = this.property.value
+}

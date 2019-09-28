@@ -14,7 +14,7 @@ class PropertyTests {
     @Nested
     inner class GenericPropertyTests {
         private fun <T> testConfiguration(property: Property<T>, first: T, second: T) {
-            var delegate by property
+            var delegate by property.delegation()
             assertEquals(property.value, delegate)
 
             delegate = first
@@ -48,7 +48,7 @@ class PropertyTests {
     @Nested
     inner class BooleanPropertyTests {
         private fun testConfiguration(property: BooleanProperty, first: Boolean, second: Boolean) {
-            var delegate by property
+            var delegate by property.delegation()
             assertEquals(property.value, delegate)
 
             delegate = first
@@ -67,7 +67,7 @@ class PropertyTests {
     @Nested
     inner class IntegerPropertyTests {
         private fun testConfiguration(property: IntegerProperty, first: Int, second: Int) {
-            var delegate by property
+            var delegate by property.delegation()
             assertEquals(property.value, delegate)
 
             delegate = first
@@ -86,7 +86,7 @@ class PropertyTests {
     @Nested
     inner class LongPropertyTests {
         private fun testConfiguration(property: LongProperty, first: Long, second: Long) {
-            var delegate by property
+            var delegate by property.delegation()
             assertEquals(property.value, delegate)
 
             delegate = first
@@ -105,7 +105,7 @@ class PropertyTests {
     @Nested
     inner class DoublePropertyTests {
         private fun testConfiguration(property: DoubleProperty, first: Double, second: Double) {
-            var delegate by property
+            var delegate by property.delegation()
             assertEquals(property.value, delegate)
 
             delegate = first
@@ -124,7 +124,7 @@ class PropertyTests {
     @Nested
     inner class FloatPropertyTests {
         private fun testConfiguration(property: FloatProperty, first: Float, second: Float) {
-            var delegate by property
+            var delegate by property.delegation()
             assertEquals(property.value, delegate)
 
             delegate = first
