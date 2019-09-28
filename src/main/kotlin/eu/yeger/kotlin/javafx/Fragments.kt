@@ -16,7 +16,7 @@ open class Fragment<out T: Node>(private val builder: () -> T) {
     fun instance() = builder()
 }
 
-internal fun <T: Node> T.wrapped() = Fragment { this }
+fun <T: Node> T.asFragment() = Fragment { this }
 
 inline fun button(text: String = "Button", crossinline init: @FXMarker Button.() -> Unit = {}) =
     Fragment { Button(text).apply(init) }

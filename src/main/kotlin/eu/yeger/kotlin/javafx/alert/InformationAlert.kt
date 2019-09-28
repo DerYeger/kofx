@@ -17,7 +17,7 @@ class InformationAlert : Alert() {
                 padding = Insets(10.0)
                 spacing = 10.0
                 child { label(text) }
-                child { confirmButton.wrapped() }
+                child { confirmButton.asFragment() }
             }
         }
     }
