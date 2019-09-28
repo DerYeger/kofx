@@ -30,11 +30,17 @@ class ConfirmationAlert : Alert() {
 }
 
 inline fun ConfirmationAlert.onConfirm(crossinline block: (ActionEvent) -> Unit) {
-    confirmButton.setOnAction { block(it) }
+    confirmButton.setOnAction {
+        hide()
+        block(it)
+    }
 }
 
 inline fun ConfirmationAlert.onCancel(crossinline block: (ActionEvent) -> Unit) {
-    cancelButton.setOnAction { block(it) }
+    cancelButton.setOnAction {
+        hide()
+        block(it)
+    }
 }
 
 fun confirmationAlert(init: @FXMarker ConfirmationAlert.() -> Unit) {
