@@ -3,103 +3,140 @@ package eu.yeger.kotlin.javafx
 import com.sun.javafx.collections.ObservableMapWrapper
 import javafx.beans.property.*
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import java.util.concurrent.ThreadLocalRandom
 
 class PropertyTests {
 
-    @Test
-    fun testSimpleBooleanProperty() {
-        val booleanProperty = SimpleBooleanProperty()
-        var delegatedBoolean by booleanProperty
-        assertFalse(booleanProperty.value)
-        assertFalse(delegatedBoolean)
+    private val rand = ThreadLocalRandom.current()
 
-        delegatedBoolean = true
-        assertTrue(booleanProperty.value)
-        assertTrue(delegatedBoolean)
+    @Nested
+    inner class GenericPropertyTests {
+        private fun <T> testConfiguration(property: Property<T>, first: T, second: T) {
+            var delegate by property
+            assertEquals(property.value, delegate)
 
-        booleanProperty.value = false
-        assertFalse(booleanProperty.value)
-        assertFalse(delegatedBoolean)
+            delegate = first
+            assertEquals(property.value, delegate)
+
+            property.value = second
+            assertEquals(property.value, delegate)
+        }
+
+        @Test
+        fun testSimpleStringProperty() {
+            testConfiguration(SimpleStringProperty(), "First", "Second")
+        }
+
+        @Test
+        fun testSimpleMapProperty() {
+            testConfiguration(SimpleMapProperty<Int, Int>(), ObservableMapWrapper(mapOf(0 to 1)), ObservableMapWrapper(mapOf(1 to 2)))
+        }
+
+        @Test
+        fun testSimpleObjectProperty() {
+            testConfiguration(SimpleObjectProperty<Pair<Int, Int>>(), 0 to 1, 1 to 2)
+        }
+
+        @Test
+        fun testSimpleObjectPropertyWithNullValues() {
+            testConfiguration(SimpleObjectProperty<Pair<Int, Int>>(), 0 to 1, null)
+        }
     }
 
-    @Test
-    fun testSimpleIntegerProperty() {
-        val integerProperty = SimpleIntegerProperty()
-        var delegatedInteger by integerProperty
-        assertEquals(0, integerProperty.value)
-        assertEquals(0, delegatedInteger)
+    @Nested
+    inner class BooleanPropertyTests {
+        private fun testConfiguration(property: BooleanProperty, first: Boolean, second: Boolean) {
+            var delegate by property
+            assertEquals(property.value, delegate)
 
-        delegatedInteger = 1
-        assertEquals(1, integerProperty.value)
-        assertEquals(1, delegatedInteger)
+            delegate = first
+            assertEquals(property.value, delegate)
 
-        integerProperty.value = 2
-        assertEquals(2, integerProperty.value)
-        assertEquals(2, delegatedInteger)
+            property.value = second
+            assertEquals(property.value, delegate)
+        }
+
+        @Test
+        fun testSimpleBooleanProperty() {
+            testConfiguration(SimpleBooleanProperty(), rand.nextBoolean(), rand.nextBoolean())
+        }
     }
 
-    @Test
-    fun testSimpleDoubleProperty() {
-        val doubleProperty = SimpleDoubleProperty()
-        var delegatedDouble by doubleProperty
-        assertEquals(0.0, doubleProperty.value)
-        assertEquals(0.0, delegatedDouble)
+    @Nested
+    inner class IntegerPropertyTests {
+        private fun testConfiguration(property: IntegerProperty, first: Int, second: Int) {
+            var delegate by property
+            assertEquals(property.value, delegate)
 
-        delegatedDouble = 1.0
-        assertEquals(1.0, doubleProperty.value)
-        assertEquals(1.0, delegatedDouble)
+            delegate = first
+            assertEquals(property.value, delegate)
 
-        doubleProperty.value = 2.0
-        assertEquals(2.0, doubleProperty.value)
-        assertEquals(2.0, delegatedDouble)
+            property.value = second
+            assertEquals(property.value, delegate)
+        }
+
+        @Test
+        fun testSimpleIntegerProperty() {
+            testConfiguration(SimpleIntegerProperty(), rand.nextInt(), rand.nextInt())
+        }
     }
 
-    @Test
-    fun testSimpleStringProperty() {
-        val stringProperty = SimpleStringProperty()
-        var delegatedString by stringProperty
-        assertEquals(null, stringProperty.value)
-        assertEquals(null, delegatedString)
+    @Nested
+    inner class LongPropertyTests {
+        private fun testConfiguration(property: LongProperty, first: Long, second: Long) {
+            var delegate by property
+            assertEquals(property.value, delegate)
 
-        delegatedString = "First"
-        assertEquals("First", stringProperty.value)
-        assertEquals("First", delegatedString)
+            delegate = first
+            assertEquals(property.value, delegate)
 
-        stringProperty.value = "Second"
-        assertEquals("Second", stringProperty.value)
-        assertEquals("Second", delegatedString)
+            property.value = second
+            assertEquals(property.value, delegate)
+        }
+
+        @Test
+        fun testSimpleLongProperty() {
+            testConfiguration(SimpleLongProperty(), rand.nextLong(), rand.nextLong())
+        }
     }
 
-    @Test
-    fun testSimpleMapProperty() {
-        val mapProperty = SimpleMapProperty<Int, Int>(ObservableMapWrapper(HashMap<Int, Int>()))
-        val delegatedMap by mapProperty
-        assertTrue(mapProperty.value.isEmpty())
-        assertTrue(delegatedMap.isEmpty())
+    @Nested
+    inner class DoublePropertyTests {
+        private fun testConfiguration(property: DoubleProperty, first: Double, second: Double) {
+            var delegate by property
+            assertEquals(property.value, delegate)
 
-        delegatedMap[0] = 1
-        assertEquals( 1, mapProperty.value[0])
-        assertEquals(1, delegatedMap[0])
+            delegate = first
+            assertEquals(property.value, delegate)
 
-        mapProperty.value[1] = 2
-        assertEquals( 2, mapProperty.value[1])
-        assertEquals(2, delegatedMap[1])
+            property.value = second
+            assertEquals(property.value, delegate)
+        }
+
+        @Test
+        fun testSimpleDoubleProperty() {
+            testConfiguration(SimpleDoubleProperty(), rand.nextDouble(), rand.nextDouble())
+        }
     }
 
-    @Test
-    fun testSimpleObjectProperty() {
-        val objectProperty = SimpleObjectProperty<Pair<Int, Int>>()
-        var delegatedObject by objectProperty
-        assertEquals( null, objectProperty.value)
-        assertEquals(null, delegatedObject)
+    @Nested
+    inner class FloatPropertyTests {
+        private fun testConfiguration(property: FloatProperty, first: Float, second: Float) {
+            var delegate by property
+            assertEquals(property.value, delegate)
 
-        delegatedObject = 1 to 2
-        assertEquals( 1 to 2, objectProperty.value)
-        assertEquals(1 to 2, delegatedObject)
+            delegate = first
+            assertEquals(property.value, delegate)
 
-        objectProperty.value = 2 to 3
-        assertEquals( 2 to 3, objectProperty.value)
-        assertEquals(2 to 3, delegatedObject)
+            property.value = second
+            assertEquals(property.value, delegate)
+        }
+
+        @Test
+        fun testSimpleFloatProperty() {
+            testConfiguration(SimpleFloatProperty(), rand.nextFloat(), rand.nextFloat())
+        }
     }
 }
