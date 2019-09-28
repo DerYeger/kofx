@@ -62,6 +62,18 @@ class PropertyTests {
         fun testSimpleBooleanProperty() {
             testConfiguration(SimpleBooleanProperty(), rand.nextBoolean(), rand.nextBoolean())
         }
+
+        @Test
+        fun testFlipExtension() {
+            val property = SimpleBooleanProperty(false)
+            val value by property.delegation()
+            assertFalse(value)
+
+            property.flip()
+            assertTrue(value)
+
+            assertFalse(property.flipped())
+        }
     }
 
     @Nested

@@ -15,7 +15,12 @@ class Delegate<T>(private val property: Property<T>) {
 }
 
 fun BooleanProperty.flip() {
-    this.value = this.value.not()
+    value = value.not()
+}
+
+fun BooleanProperty.flipped(): Boolean {
+    value = value.not()
+    return value
 }
 
 fun BooleanProperty.delegation() = BooleanDelegate(this)

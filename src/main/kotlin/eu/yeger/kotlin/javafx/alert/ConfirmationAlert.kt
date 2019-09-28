@@ -21,8 +21,8 @@ class ConfirmationAlert : Alert() {
                     alignment = Pos.CENTER_RIGHT
                     padding = Insets(10.0)
                     spacing = 10.0
-                    child { confirmButton.asFragment() }
-                    child { cancelButton.asFragment() }
+                    child { confirmButton.asSingletonFragment() }
+                    child { cancelButton.asSingletonFragment() }
                 }
             }
         }

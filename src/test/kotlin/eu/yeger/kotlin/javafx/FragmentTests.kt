@@ -1,8 +1,10 @@
 package eu.yeger.kotlin.javafx
 
+import javafx.beans.property.SimpleStringProperty
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.testfx.assertions.api.Assertions.assertThat
@@ -16,7 +18,7 @@ class FragmentTests : ApplicationTest() {
         @Test
         fun testButtonWithoutText() {
             val button = button().instance()
-            assertThat(button).hasText("Button")
+            assertThat(button).hasText("")
         }
 
         @Test
@@ -46,13 +48,22 @@ class FragmentTests : ApplicationTest() {
         @Test
         fun testLabelWithoutText() {
             val label = label().instance()
-            assertThat(label).hasText("Label")
+            assertThat(label).hasText("")
         }
 
         @Test
         fun testLabelWithText() {
             val label = label("Hello").instance()
             assertThat(label).hasText("Hello")
+        }
+
+        @Test
+        fun testLabelWithBinding() {
+            val property = SimpleStringProperty("First")
+            val label = label(property).instance()
+            assertThat(label).hasText("First")
+            property.value = "Second"
+            assertThat(label).hasText("Second")
         }
     }
 
@@ -114,10 +125,25 @@ class FragmentTests : ApplicationTest() {
     inner class GridPaneTests {
 
         @Test
-        fun testGridPaneWithIndices() {
+        fun testAddingChildrenWithoutCoordinates() {
             val gridPane = gridPane {
                 child { label("First") }
                 child { button("Second") }
+            }.instance()
+            assertThat(gridPane).hasExactlyNumChildren(2)
+            assertThat(gridPane.children[0] as Label).hasText("First")
+            assertThat(gridPane.children[1] as Button).hasText("Second")
+        }
+
+        @Test
+        fun testAddingChildrenWithCoordinates() {
+            val gridPane = gridPane {
+                child(0, 0) {
+                    label("First")
+                }
+                child(1, 1) {
+                    button("Second")
+                }
             }.instance()
             assertThat(gridPane).hasExactlyNumChildren(2)
             assertThat(gridPane.children[0] as Label).hasText("First")
@@ -137,6 +163,39 @@ class FragmentTests : ApplicationTest() {
             assertThat(stackPane).hasExactlyNumChildren(2)
             assertThat(stackPane.children[0] as Label).hasText("First")
             assertThat(stackPane.children[1] as Button).hasText("Second")
+        }
+    }
+
+    @Nested
+    inner class FragmentInclusionTests {
+        @Test
+        fun testMultipleInstanceCreations() {
+            val singleButtonFragment = button("IncludedButton")
+            val container = vBox {
+                child { singleButtonFragment }
+            }.instance()
+            val anotherContainer = vBox {
+                child { singleButtonFragment }
+            }.instance()
+            assertThat(container.children[0] as Button).hasText("IncludedButton")
+            assertThat(anotherContainer.children[0] as Button).hasText("IncludedButton")
+        }
+
+        @Test
+        fun testSingletonFragmentException() {
+            val singleButtonFragment =Button("IncludedButton").asSingletonFragment()
+            val container = vBox {
+                child { singleButtonFragment }
+            }.instance()
+            assertThat(container.children[0] as Button).hasText("IncludedButton")
+            try {
+                vBox {
+                    child { singleButtonFragment }
+                }.instance()
+            } catch (e: FragmentException) {
+                return
+            }
+            fail<String>("Exception should have been thrown")
         }
     }
 }

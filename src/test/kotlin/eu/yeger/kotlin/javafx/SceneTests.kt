@@ -44,6 +44,7 @@ class SceneTests : ApplicationTest() {
         }.apply {
             minHeight = height
             minWidth = width
+            toFront()
         }.show()
     }
 
