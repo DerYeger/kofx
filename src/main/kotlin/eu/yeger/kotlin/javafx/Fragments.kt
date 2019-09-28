@@ -12,7 +12,7 @@ import javafx.scene.layout.StackPane
 import javafx.scene.layout.VBox
 import javafx.scene.shape.Rectangle
 
-open class Fragment<T: Node>(private val builder: () -> T) {
+open class Fragment<out T: Node>(private val builder: () -> T) {
     fun instance() = builder()
 }
 
