@@ -1,10 +1,10 @@
 package eu.yeger.kotlin.javafx
 
+import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.scene.control.Button
 import javafx.scene.control.Label
-import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.testfx.assertions.api.Assertions.assertThat
@@ -77,6 +77,29 @@ class FragmentTests : ApplicationTest() {
             }.instance()
             assertThat(textField).hasText("This is a test")
         }
+
+        @Test
+        fun testTextFieldWithProperty() {
+            val property = SimpleStringProperty("First")
+            val textField = textField(property).instance()
+            assertEquals(property.value, textField.text)
+
+            property.value = "Second"
+            assertEquals(property.value, textField.text)
+
+            textField.text = "Third"
+            assertEquals(property.value, textField.text)
+        }
+
+        @Test
+        fun testTextFieldWithBinding() {
+            val property = SimpleIntegerProperty(0)
+            val textField = textField(property.asString()).instance()
+            assertEquals(property.value.toString(), textField.text)
+
+            property.value = 1
+            assertEquals(property.value.toString(), textField.text)
+        }
     }
 
     @Nested
@@ -88,6 +111,29 @@ class FragmentTests : ApplicationTest() {
                 text = "12345"
             }.instance()
             assertThat(passwordField).hasText("12345")
+        }
+
+        @Test
+        fun testPasswordFieldWithProperty() {
+            val property = SimpleStringProperty("First")
+            val passwordField = passwordField(property).instance()
+            assertEquals(property.value, passwordField.text)
+
+            property.value = "Second"
+            assertEquals(property.value, passwordField.text)
+
+            passwordField.text = "Third"
+            assertEquals(property.value, passwordField.text)
+        }
+
+        @Test
+        fun testPasswordFieldWithBinding() {
+            val property = SimpleIntegerProperty(0)
+            val passwordField = passwordField(property.asString()).instance()
+            assertEquals(property.value.toString(), passwordField.text)
+
+            property.value = 1
+            assertEquals(property.value.toString(), passwordField.text)
         }
     }
 
