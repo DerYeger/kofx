@@ -4,21 +4,18 @@ import eu.yeger.kotlin.javafx.*
 import javafx.event.ActionEvent
 import javafx.geometry.Insets
 import javafx.geometry.Pos
-import javafx.scene.Scene
 import javafx.scene.control.Button
 
 class InformationAlert : Alert() {
     val confirmButton = Button("Confirm").apply { isDefaultButton = true }
 
-    override fun build(): Scene {
-        return scene {
-            vBox {
-                alignment = Pos.CENTER_RIGHT
-                padding = Insets(10.0)
-                spacing = 10.0
-                child { label(text) }
-                child { confirmButton.asSingletonFragment() }
-            }
+    override fun build() = scene {
+        vBox {
+            alignment = Pos.CENTER_RIGHT
+            padding = Insets(10.0)
+            spacing = 10.0
+            child { label(text) }
+            child { confirmButton.asSingletonFragment() }
         }
     }
 }
