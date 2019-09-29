@@ -1,14 +1,38 @@
 package eu.yeger.kotlin.javafx.alert
 
 import javafx.application.Platform
+import javafx.scene.Node
+import javafx.scene.Scene
+import javafx.scene.control.Label
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.testfx.assertions.api.Assertions.assertThat
 import org.testfx.framework.junit5.ApplicationTest
 import org.testfx.util.WaitForAsyncUtils
 
 class AlertTests : ApplicationTest() {
+
+    @Nested
+    inner class AlertTest {
+
+        @Test
+        fun testAlertAlreadyActiveException() {
+            val alert = object : Alert() {
+                override fun build() = Scene(Label("Alert"))
+            }
+            Platform.runLater {
+                alert.show()
+            }
+            WaitForAsyncUtils.waitForFxEvents()
+            assertThat(lookup("Alert").queryLabeled()).isNotNull
+
+            assertThrows<AlertException> {
+                alert.show()
+            }
+        }
+    }
 
     @Nested
     inner class InformationAlertTests {
@@ -21,7 +45,6 @@ class AlertTests : ApplicationTest() {
                     text = "InformationAlertTest"
                     onConfirm {
                         confirmed = true
-                        this@informationAlert.hide()
                     }
                 }
             }
@@ -29,6 +52,7 @@ class AlertTests : ApplicationTest() {
             assertThat(lookup("InformationAlertTest").queryLabeled()).isNotNull
             clickOn(lookup("Confirm").queryButton())
             assertTrue(confirmed)
+            assertThat(lookup("ConfirmationAlertTest").tryQuery<Node>()).isEmpty
         }
     }
 
@@ -41,16 +65,14 @@ class AlertTests : ApplicationTest() {
             Platform.runLater {
                 confirmationAlert {
                     text = "ConfirmationAlertTest"
-                    onConfirm {
-                        confirmed = true
-                        this@confirmationAlert.hide()
-                    }
+                    onConfirm { confirmed = true }
                 }
             }
             WaitForAsyncUtils.waitForFxEvents()
             assertThat(lookup("ConfirmationAlertTest").queryLabeled()).isNotNull
             clickOn(lookup("Confirm").queryButton())
             assertTrue(confirmed)
+            assertThat(lookup("ConfirmationAlertTest").tryQuery<Node>()).isEmpty
         }
 
         @Test
@@ -61,10 +83,7 @@ class AlertTests : ApplicationTest() {
                     text = "ConfirmationAlertTest"
                     cancelButton.apply {
                         text = "CustomText"
-                        onCancel {
-                            confirmed = true
-                            this@confirmationAlert.hide()
-                        }
+                        onCancel { confirmed = true }
                     }
                 }
             }
@@ -72,6 +91,7 @@ class AlertTests : ApplicationTest() {
             assertThat(lookup("ConfirmationAlertTest").queryLabeled()).isNotNull
             clickOn(lookup("CustomText").queryButton())
             assertTrue(confirmed)
+            assertThat(lookup("ConfirmationAlertTest").tryQuery<Node>()).isEmpty
         }
     }
 

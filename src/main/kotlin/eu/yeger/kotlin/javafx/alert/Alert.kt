@@ -3,6 +3,8 @@ package eu.yeger.kotlin.javafx.alert
 import javafx.scene.Scene
 import javafx.stage.Stage
 
+class AlertException(message: String) : Exception(message)
+
 abstract class Alert {
     var title = "Alert"
     var text = ""
@@ -12,6 +14,7 @@ abstract class Alert {
     private var stage: Stage? = null
 
     fun show() {
+        stage?.run { throw AlertException("Alert $this is already active") }
         stage = Stage().apply {
             scene = build()
             title = this@Alert.title
@@ -24,5 +27,6 @@ abstract class Alert {
 
     fun hide() {
         stage?.close()
+        stage = null
     }
 }
