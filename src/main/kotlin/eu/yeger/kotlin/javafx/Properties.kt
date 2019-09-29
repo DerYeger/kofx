@@ -42,14 +42,6 @@ class BooleanDelegate(private val property: BooleanProperty) {
     operator fun getValue(thisRef: Any?, property: KProperty<*>): Boolean = this.property.value
 }
 
-fun <T: Node> T.bindVisibility(property: BooleanProperty) {
-    visibleProperty().bind(property)
-}
-
-fun <T: Node> T.bindVisibility(binding: BooleanBinding) {
-    visibleProperty().bind(binding)
-}
-
 // ===============================================================
 // IntegerProperty
 
