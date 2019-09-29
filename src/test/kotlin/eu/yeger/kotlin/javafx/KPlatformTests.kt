@@ -2,17 +2,49 @@ package eu.yeger.kotlin.javafx
 
 import eu.yeger.kotlin.javafx.KPlatform.callAndWait
 import eu.yeger.kotlin.javafx.KPlatform.runAndWait
+import eu.yeger.kotlin.javafx.KPlatform.runOnFXThread
 import javafx.application.Platform
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.testfx.framework.junit5.ApplicationTest
+import org.testfx.util.WaitForAsyncUtils
 
 class KPlatformTests : ApplicationTest() {
 
     @Nested
-    inner class RunAndWaitTest {
+    inner class RunOnFXThreadTests {
+
+        @Test
+        fun testRunOnFXThreadOnWorkerThread() {
+            var ran = false
+            assertFalse(Platform.isFxApplicationThread())
+            runOnFXThread {
+                assertTrue(Platform.isFxApplicationThread())
+                ran = true
+            }
+            WaitForAsyncUtils.waitForFxEvents()
+            assertTrue(ran)
+        }
+
+        @Test
+        fun testRunOnFXThreadOnFXThread() {
+            Platform.runLater {
+                var ran = false
+                assertTrue(Platform.isFxApplicationThread())
+                runOnFXThread {
+                    assertTrue(Platform.isFxApplicationThread())
+                    ran = true
+                }
+                assertTrue(ran)
+            }
+        }
+    }
+
+    @Nested
+    inner class RunAndWaitTests {
+
         @Test
         fun testRunAndWaitOnWorkerThread() {
             var ran = false
