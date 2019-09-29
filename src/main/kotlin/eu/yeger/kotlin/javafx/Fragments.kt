@@ -1,9 +1,8 @@
 package eu.yeger.kotlin.javafx
 
-import javafx.beans.binding.ObjectBinding
-import javafx.beans.binding.StringBinding
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.StringProperty
+import javafx.beans.value.ObservableValue
 import javafx.scene.Node
 import javafx.scene.control.Button
 import javafx.scene.control.Label
@@ -63,10 +62,10 @@ inline fun label(property: StringProperty, crossinline init: @FXMarker Label.() 
         }
     }
 
-inline fun label(binding: StringBinding, crossinline init: @FXMarker Label.() -> Unit = {}) =
+inline fun label(observable: ObservableValue<String>, crossinline init: @FXMarker Label.() -> Unit = {}) =
     Fragment {
         Label().apply {
-            textProperty().bind(binding)
+            textProperty().bind(observable)
             init()
         }
     }
@@ -85,10 +84,10 @@ inline fun textField(property: StringProperty, crossinline init: @FXMarker TextF
         }
     }
 
-inline fun textField(binding: StringBinding, crossinline init: @FXMarker TextField.() -> Unit = {}) =
+inline fun textField(observable: ObservableValue<String>, crossinline init: @FXMarker TextField.() -> Unit = {}) =
     Fragment {
         TextField().apply {
-            textProperty().bind(binding)
+            textProperty().bind(observable)
             init()
         }
     }
@@ -107,10 +106,10 @@ inline fun passwordField(property: StringProperty, crossinline init: @FXMarker P
         }
     }
 
-inline fun passwordField(binding: StringBinding, crossinline init: @FXMarker PasswordField.() -> Unit = {}) =
+inline fun passwordField(observable: ObservableValue<String>, crossinline init: @FXMarker PasswordField.() -> Unit = {}) =
     Fragment {
         PasswordField().apply {
-            textProperty().bind(binding)
+            textProperty().bind(observable)
             init()
         }
     }
@@ -144,13 +143,13 @@ inline fun imageView(property: ObjectProperty<Image>, fit: Boolean = false, cros
         }
     }
 
-inline fun imageView(binding: ObjectBinding<Image>, fit: Boolean = false, crossinline init: @FXMarker ImageView.() -> Unit = {}) =
+inline fun imageView(observable: ObservableValue<Image>, fit: Boolean = false, crossinline init: @FXMarker ImageView.() -> Unit = {}) =
     Fragment {
         ImageView().apply {
-            imageProperty().bind(binding)
+            imageProperty().bind(observable)
             if (fit) {
-                fitWidth = binding.value.width
-                fitHeight = binding.value.height
+                fitWidth = observable.value.width
+                fitHeight = observable.value.height
             }
             init()
         }
