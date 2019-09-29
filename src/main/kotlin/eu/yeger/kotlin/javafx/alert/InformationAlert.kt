@@ -14,14 +14,17 @@ class InformationAlert : Alert() {
             alignment = Pos.CENTER_RIGHT
             padding = Insets(10.0)
             spacing = 10.0
-            label(text)
-            withChild(confirmButton)
+            child { label(text) }
+            child { confirmButton.asSingletonFragment() }
         }
     }
 }
 
 inline fun InformationAlert.onConfirm(crossinline block: (ActionEvent) -> Unit) {
-    confirmButton.setOnAction { block(it) }
+    confirmButton.setOnAction {
+        hide()
+        block(it)
+    }
 }
 
 fun informationAlert(init: @FXMarker InformationAlert.() -> Unit) {

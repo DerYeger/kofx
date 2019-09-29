@@ -15,24 +15,32 @@ class ConfirmationAlert : Alert() {
             alignment = Pos.CENTER_RIGHT
             padding = Insets(10.0)
             spacing = 10.0
-            label(text)
-            hBox {
-                alignment = Pos.CENTER_RIGHT
-                padding = Insets(10.0)
-                spacing = 10.0
-                withChild(confirmButton)
-                withChild(cancelButton)
+            child { label(text) }
+            child {
+                hBox {
+                    alignment = Pos.CENTER_RIGHT
+                    padding = Insets(10.0)
+                    spacing = 10.0
+                    child { confirmButton.asSingletonFragment() }
+                    child { cancelButton.asSingletonFragment() }
+                }
             }
         }
     }
 }
 
 inline fun ConfirmationAlert.onConfirm(crossinline block: (ActionEvent) -> Unit) {
-    confirmButton.setOnAction { block(it) }
+    confirmButton.setOnAction {
+        hide()
+        block(it)
+    }
 }
 
 inline fun ConfirmationAlert.onCancel(crossinline block: (ActionEvent) -> Unit) {
-    cancelButton.setOnAction { block(it) }
+    cancelButton.setOnAction {
+        hide()
+        block(it)
+    }
 }
 
 fun confirmationAlert(init: @FXMarker ConfirmationAlert.() -> Unit) {

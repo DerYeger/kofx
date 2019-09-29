@@ -1,35 +1,55 @@
 package eu.yeger.kotlin.javafx.alert
 
-import javafx.application.Platform
-import org.assertj.core.api.Fail.fail
+import eu.yeger.kotlin.javafx.KPlatform.runAndWait
+import javafx.scene.Node
+import javafx.scene.Scene
+import javafx.scene.control.Label
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.testfx.assertions.api.Assertions.assertThat
 import org.testfx.framework.junit5.ApplicationTest
-import org.testfx.util.WaitForAsyncUtils
 
 class AlertTests : ApplicationTest() {
+
+    @Nested
+    inner class AlertTest {
+
+        @Test
+        fun `test AlertAlreadyActive Exception`() {
+            val alert = object : Alert() {
+                override fun build() = Scene(Label("Alert"))
+            }
+            runAndWait {
+                alert.show()
+            }
+            assertThat(lookup("Alert").queryLabeled()).isNotNull
+
+            assertThrows<AlertException> {
+                alert.show()
+            }
+        }
+    }
 
     @Nested
     inner class InformationAlertTests {
 
         @Test
-        fun testConfirmButtonClicked() {
+        fun `test ConfirmButton clicked`() {
             var confirmed = false
-            Platform.runLater {
+            runAndWait {
                 informationAlert {
                     text = "InformationAlertTest"
                     onConfirm {
                         confirmed = true
-                        this@informationAlert.hide()
                     }
                 }
             }
-            WaitForAsyncUtils.waitForFxEvents()
             assertThat(lookup("InformationAlertTest").queryLabeled()).isNotNull
             clickOn(lookup("Confirm").queryButton())
             assertTrue(confirmed)
+            assertThat(lookup("ConfirmationAlertTest").tryQuery<Node>()).isEmpty
         }
     }
 
@@ -37,43 +57,36 @@ class AlertTests : ApplicationTest() {
     inner class ConfirmationAlertTests {
 
         @Test
-        fun testConfirmButtonClicked() {
+        fun `test ConfirmButton clicked`() {
             var confirmed = false
-            Platform.runLater {
+            runAndWait {
                 confirmationAlert {
                     text = "ConfirmationAlertTest"
-                    onConfirm {
-                        confirmed = true
-                        this@confirmationAlert.hide()
-                    }
+                    onConfirm { confirmed = true }
                 }
             }
-            WaitForAsyncUtils.waitForFxEvents()
             assertThat(lookup("ConfirmationAlertTest").queryLabeled()).isNotNull
             clickOn(lookup("Confirm").queryButton())
             assertTrue(confirmed)
+            assertThat(lookup("ConfirmationAlertTest").tryQuery<Node>()).isEmpty
         }
 
         @Test
-        fun testCancelButtonClicked() {
+        fun `test CancelButton clicked`() {
             var confirmed = false
-            Platform.runLater {
+            runAndWait {
                 confirmationAlert {
                     text = "ConfirmationAlertTest"
                     cancelButton.apply {
                         text = "CustomText"
-                        onCancel {
-                            confirmed = true
-                            this@confirmationAlert.hide()
-                        }
+                        onCancel { confirmed = true }
                     }
                 }
             }
-            WaitForAsyncUtils.waitForFxEvents()
             assertThat(lookup("ConfirmationAlertTest").queryLabeled()).isNotNull
             clickOn(lookup("CustomText").queryButton())
             assertTrue(confirmed)
+            assertThat(lookup("ConfirmationAlertTest").tryQuery<Node>()).isEmpty
         }
     }
-
 }
