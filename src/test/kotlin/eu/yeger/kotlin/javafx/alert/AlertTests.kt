@@ -1,6 +1,6 @@
 package eu.yeger.kotlin.javafx.alert
 
-import javafx.application.Platform
+import eu.yeger.kotlin.javafx.KPlatform.runAndWait
 import javafx.scene.Node
 import javafx.scene.Scene
 import javafx.scene.control.Label
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.testfx.assertions.api.Assertions.assertThat
 import org.testfx.framework.junit5.ApplicationTest
-import org.testfx.util.WaitForAsyncUtils
 
 class AlertTests : ApplicationTest() {
 
@@ -22,10 +21,9 @@ class AlertTests : ApplicationTest() {
             val alert = object : Alert() {
                 override fun build() = Scene(Label("Alert"))
             }
-            Platform.runLater {
+            runAndWait {
                 alert.show()
             }
-            WaitForAsyncUtils.waitForFxEvents()
             assertThat(lookup("Alert").queryLabeled()).isNotNull
 
             assertThrows<AlertException> {
@@ -40,7 +38,7 @@ class AlertTests : ApplicationTest() {
         @Test
         fun testConfirmButtonClicked() {
             var confirmed = false
-            Platform.runLater {
+            runAndWait {
                 informationAlert {
                     text = "InformationAlertTest"
                     onConfirm {
@@ -48,7 +46,6 @@ class AlertTests : ApplicationTest() {
                     }
                 }
             }
-            WaitForAsyncUtils.waitForFxEvents()
             assertThat(lookup("InformationAlertTest").queryLabeled()).isNotNull
             clickOn(lookup("Confirm").queryButton())
             assertTrue(confirmed)
@@ -62,13 +59,12 @@ class AlertTests : ApplicationTest() {
         @Test
         fun testConfirmButtonClicked() {
             var confirmed = false
-            Platform.runLater {
+            runAndWait {
                 confirmationAlert {
                     text = "ConfirmationAlertTest"
                     onConfirm { confirmed = true }
                 }
             }
-            WaitForAsyncUtils.waitForFxEvents()
             assertThat(lookup("ConfirmationAlertTest").queryLabeled()).isNotNull
             clickOn(lookup("Confirm").queryButton())
             assertTrue(confirmed)
@@ -78,7 +74,7 @@ class AlertTests : ApplicationTest() {
         @Test
         fun testCancelButtonClicked() {
             var confirmed = false
-            Platform.runLater {
+            runAndWait {
                 confirmationAlert {
                     text = "ConfirmationAlertTest"
                     cancelButton.apply {
@@ -87,12 +83,10 @@ class AlertTests : ApplicationTest() {
                     }
                 }
             }
-            WaitForAsyncUtils.waitForFxEvents()
             assertThat(lookup("ConfirmationAlertTest").queryLabeled()).isNotNull
             clickOn(lookup("CustomText").queryButton())
             assertTrue(confirmed)
             assertThat(lookup("ConfirmationAlertTest").tryQuery<Node>()).isEmpty
         }
     }
-
 }

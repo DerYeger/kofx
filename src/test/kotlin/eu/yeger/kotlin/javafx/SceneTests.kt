@@ -5,7 +5,7 @@ import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.layout.HBox
 import javafx.stage.Stage
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.testfx.assertions.api.Assertions.assertThat
 import org.testfx.framework.junit5.ApplicationTest
@@ -22,17 +22,13 @@ class SceneTests : ApplicationTest() {
 
     override fun start(primaryStage: Stage) {
         val context = ExampleContextWithCounter()
-        val scene = scene {
-            vBox {
-                child {
-                    label {
-                        textProperty().bind(context.clickCounter.asString())
-                    }
-                }
-                child {
-                    button("My Button") {
-                        setOnAction {
-                            context.clickCounter.increment()
+        val scene = with(context) {
+            scene {
+                vBox {
+                    child { label(clickCounter.asString()) }
+                    child {
+                        button("My Button") {
+                            setOnAction { clickCounter.increment() }
                         }
                     }
                 }
@@ -65,7 +61,7 @@ class SceneTests : ApplicationTest() {
             }
         }.root as HBox
         assertThat(root).hasExactlyNumChildren(2)
-        Assertions.assertEquals("First", (root.children[0] as Label).text)
-        Assertions.assertEquals("Second", (root.children[1] as Button).text)
+        assertEquals("First", (root.children[0] as Label).text)
+        assertEquals("Second", (root.children[1] as Button).text)
     }
 }

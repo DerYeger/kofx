@@ -1,9 +1,7 @@
 package eu.yeger.kotlin.javafx
 
 import io.mockk.mockk
-import javafx.beans.binding.Bindings
 import javafx.beans.binding.Bindings.createObjectBinding
-import javafx.beans.binding.ObjectBinding
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
