@@ -1,7 +1,10 @@
 package eu.yeger.kotlin.javafx
 
-import javafx.beans.binding.Bindings
+import javafx.beans.binding.Bindings.createBooleanBinding
+import javafx.beans.binding.Bindings.createDoubleBinding
+import javafx.beans.binding.DoubleBinding
 import javafx.beans.property.SimpleBooleanProperty
+import javafx.beans.property.SimpleDoubleProperty
 import javafx.scene.control.Label
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
@@ -32,7 +35,7 @@ class ExtensionTests : ApplicationTest() {
         @Test
         fun testBindingDisabledToBinding() {
             val property = SimpleBooleanProperty(false)
-            val binding = Bindings.createBooleanBinding(Callable { property.value }, property)
+            val binding = createBooleanBinding(Callable { property.value }, property)
             val label = Label().apply {
                 bindDisabled(binding)
             }
@@ -43,6 +46,194 @@ class ExtensionTests : ApplicationTest() {
 
             property.flip()
             assertEquals(property.value, label.isDisabled)
+        }
+    }
+
+    @Nested
+    inner class LayoutExtensionTests {
+
+        @Test
+        fun testBindingLayoutToProperty() {
+            val propertyX = SimpleDoubleProperty(1.0)
+            val propertyY = SimpleDoubleProperty(2.0)
+            val label = label {
+                bindLayoutX(propertyX)
+                bindLayoutY(propertyY)
+            }.instance()
+            assertEquals(propertyX.value, label.layoutX)
+            assertEquals(propertyY.value, label.layoutY)
+
+            propertyX.value = 3.0
+            propertyY.value = 4.0
+
+            assertEquals(propertyX.value, label.layoutX)
+            assertEquals(propertyY.value, label.layoutY)
+        }
+
+        @Test
+        fun testBindingLayoutToBinding() {
+            val propertyX = SimpleDoubleProperty(1.0)
+            val propertyY = SimpleDoubleProperty(2.0)
+            val bindingX = createDoubleBinding(Callable { propertyX.value }, propertyX)
+            val bindingY = createDoubleBinding(Callable { propertyY.value }, propertyY)
+            val label = label {
+                bindLayoutX(bindingX)
+                bindLayoutY(bindingY)
+            }.instance()
+            assertEquals(propertyX.value, label.layoutX)
+            assertEquals(propertyY.value, label.layoutY)
+
+            propertyX.value = 3.0
+            propertyY.value = 4.0
+
+            assertEquals(propertyX.value, label.layoutX)
+            assertEquals(propertyY.value, label.layoutY)
+        }
+    }
+
+    @Nested
+    inner class OpacityExtensionTests {
+
+        @Test
+        fun testBindingOpacityToProperty() {
+            val property = SimpleDoubleProperty(100.0)
+            val label = label {
+                bindOpacity(property)
+            }.instance()
+            assertEquals(property.value, label.opacity)
+
+            property.value = 42.0
+            assertEquals(property.value, label.opacity)
+        }
+
+        @Test
+        fun testBindingOpacityToBinding() {
+            val property = SimpleDoubleProperty(100.0)
+            val binding = createDoubleBinding(Callable { property.value }, property)
+            val label = label {
+                bindOpacity(binding)
+            }.instance()
+            assertEquals(property.value, label.opacity)
+
+            property.value = 42.0
+            assertEquals(property.value, label.opacity)
+        }
+    }
+
+    @Nested
+    inner class PickOnBoundsBindingExtensionTests {
+
+        @Test
+        fun testBindingPickOnBoundsToProperty() {
+            val property = SimpleBooleanProperty(false)
+            val label = Label().apply {
+                bindPickOnBounds(property)
+            }
+            assertEquals(property.value, label.isPickOnBounds)
+
+            property.flip()
+            assertEquals(property.value, label.isPickOnBounds)
+
+            property.flip()
+            assertEquals(property.value, label.isPickOnBounds)
+        }
+
+        @Test
+        fun testBindingPickOnBoundsToBinding() {
+            val property = SimpleBooleanProperty(false)
+            val binding = createBooleanBinding(Callable { property.value }, property)
+            val label = Label().apply {
+                bindPickOnBounds(binding)
+            }
+            assertEquals(property.value, label.isPickOnBounds)
+
+            property.flip()
+            assertEquals(property.value, label.isPickOnBounds)
+
+            property.flip()
+            assertEquals(property.value, label.isPickOnBounds)
+        }
+    }
+
+    @Nested
+    inner class RotationExtensionTests {
+
+        @Test
+        fun testBindingRotationToProperty() {
+            val property = SimpleDoubleProperty(100.0)
+            val label = label {
+                bindRotation(property)
+            }.instance()
+            assertEquals(property.value, label.rotate)
+
+            property.value = 42.0
+            assertEquals(property.value, label.rotate)
+        }
+
+        @Test
+        fun testBindingOpacityToBinding() {
+            val property = SimpleDoubleProperty(100.0)
+            val binding: DoubleBinding = createDoubleBinding(Callable { property.value }, property)
+            val label = label {
+                bindRotation(binding)
+            }.instance()
+            assertEquals(property.value, label.rotate)
+
+            property.value = 42.0
+            assertEquals(property.value, label.rotate)
+        }
+    }
+
+    @Nested
+    inner class ScaleExtensionTests {
+
+        @Test
+        fun testBindingScaleToProperty() {
+            val propertyX = SimpleDoubleProperty(1.0)
+            val propertyY = SimpleDoubleProperty(2.0)
+            val propertyZ = SimpleDoubleProperty(2.0)
+            val label = label {
+                bindScaleX(propertyX)
+                bindScaleY(propertyY)
+                bindScaleZ(propertyZ)
+            }.instance()
+            assertEquals(propertyX.value, label.scaleX)
+            assertEquals(propertyY.value, label.scaleY)
+            assertEquals(propertyZ.value, label.scaleZ)
+
+            propertyX.value = 4.0
+            propertyY.value = 5.0
+            propertyZ.value = 6.0
+
+            assertEquals(propertyX.value, label.scaleX)
+            assertEquals(propertyY.value, label.scaleY)
+            assertEquals(propertyZ.value, label.scaleZ)
+        }
+
+        @Test
+        fun testBindingScaleToBinding() {
+            val propertyX = SimpleDoubleProperty(1.0)
+            val propertyY = SimpleDoubleProperty(2.0)
+            val propertyZ = SimpleDoubleProperty(2.0)
+            val bindingX = createDoubleBinding(Callable { propertyX.value }, propertyX)
+            val bindingY = createDoubleBinding(Callable { propertyY.value }, propertyY)
+            val bindingZ = createDoubleBinding(Callable { propertyZ.value }, propertyZ)
+            val label = label {
+                bindScaleX(bindingX)
+                bindScaleY(bindingY)
+                bindScaleZ(bindingZ)
+            }.instance()
+            assertEquals(propertyX.value, label.scaleX)
+            assertEquals(propertyY.value, label.scaleY)
+            assertEquals(propertyZ.value, label.scaleZ)
+
+            propertyX.value = 4.0
+            propertyY.value = 5.0
+            propertyZ.value = 6.0
+
+            assertEquals(propertyX.value, label.scaleX)
+            assertEquals(propertyY.value, label.scaleY)
+            assertEquals(propertyZ.value, label.scaleZ)
         }
     }
 
@@ -67,6 +258,88 @@ class ExtensionTests : ApplicationTest() {
     }
 
     @Nested
+    inner class TranslateExtensionTests {
+
+        @Test
+        fun testBindingTranslateToProperty() {
+            val propertyX = SimpleDoubleProperty(1.0)
+            val propertyY = SimpleDoubleProperty(2.0)
+            val propertyZ = SimpleDoubleProperty(2.0)
+            val label = label {
+                bindTranslateX(propertyX)
+                bindTranslateY(propertyY)
+                bindTranslateZ(propertyZ)
+            }.instance()
+            assertEquals(propertyX.value, label.translateX)
+            assertEquals(propertyY.value, label.translateY)
+            assertEquals(propertyZ.value, label.translateZ)
+
+            propertyX.value = 4.0
+            propertyY.value = 5.0
+            propertyZ.value = 6.0
+
+            assertEquals(propertyX.value, label.translateX)
+            assertEquals(propertyY.value, label.translateY)
+            assertEquals(propertyZ.value, label.translateZ)
+        }
+
+        @Test
+        fun testBindingTranslateToBinding() {
+            val propertyX = SimpleDoubleProperty(1.0)
+            val propertyY = SimpleDoubleProperty(2.0)
+            val propertyZ = SimpleDoubleProperty(2.0)
+            val bindingX = createDoubleBinding(Callable { propertyX.value }, propertyX)
+            val bindingY = createDoubleBinding(Callable { propertyY.value }, propertyY)
+            val bindingZ = createDoubleBinding(Callable { propertyZ.value }, propertyZ)
+            val label = label {
+                bindTranslateX(bindingX)
+                bindTranslateY(bindingY)
+                bindTranslateZ(bindingZ)
+            }.instance()
+            assertEquals(propertyX.value, label.translateX)
+            assertEquals(propertyY.value, label.translateY)
+            assertEquals(propertyZ.value, label.translateZ)
+
+            propertyX.value = 4.0
+            propertyY.value = 5.0
+            propertyZ.value = 6.0
+
+            assertEquals(propertyX.value, label.translateX)
+            assertEquals(propertyY.value, label.translateY)
+            assertEquals(propertyZ.value, label.translateZ)
+        }
+    }
+
+    @Nested
+    inner class ViewOrderExtensionTests {
+
+        @Test
+        fun testBindingViewOrderToProperty() {
+            val property = SimpleDoubleProperty(100.0)
+            val label = label {
+                bindViewOrder(property)
+            }.instance()
+            assertEquals(property.value, label.viewOrder)
+
+            property.value = 42.0
+            assertEquals(property.value, label.viewOrder)
+        }
+
+        @Test
+        fun testBindingViewOrderToBinding() {
+            val property = SimpleDoubleProperty(100.0)
+            val binding: DoubleBinding = createDoubleBinding(Callable { property.value }, property)
+            val label = label {
+                bindViewOrder(binding)
+            }.instance()
+            assertEquals(property.value, label.viewOrder)
+
+            property.value = 42.0
+            assertEquals(property.value, label.viewOrder)
+        }
+    }
+
+    @Nested
     inner class VisibleBindingExtensionTests {
 
         @Test
@@ -87,7 +360,7 @@ class ExtensionTests : ApplicationTest() {
         @Test
         fun testBindingVisibleToBinding() {
             val property = SimpleBooleanProperty(false)
-            val binding = Bindings.createBooleanBinding(Callable { property.value }, property)
+            val binding = createBooleanBinding(Callable { property.value }, property)
             val label = Label().apply {
                 bindVisible(binding)
             }
