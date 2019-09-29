@@ -5,6 +5,7 @@ import javafx.beans.binding.Bindings.createDoubleBinding
 import javafx.beans.binding.DoubleBinding
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleDoubleProperty
+import javafx.beans.property.SimpleIntegerProperty
 import javafx.scene.control.Label
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
@@ -315,14 +316,14 @@ class ExtensionTests : ApplicationTest() {
 
         @Test
         fun `test binding ViewOrder to property`() {
-            val property = SimpleDoubleProperty(100.0)
+            val property = SimpleIntegerProperty(100)
             val label = label {
                 bindViewOrder(property)
             }.instance()
-            assertEquals(property.value, label.viewOrder)
+            assertEquals(property.value.toDouble(), label.viewOrder)
 
-            property.value = 42.0
-            assertEquals(property.value, label.viewOrder)
+            property.value = 42
+            assertEquals(property.value.toDouble(), label.viewOrder)
         }
 
         @Test

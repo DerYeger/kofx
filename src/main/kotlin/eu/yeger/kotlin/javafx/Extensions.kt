@@ -1,100 +1,61 @@
 package eu.yeger.kotlin.javafx
 
-import javafx.beans.binding.BooleanBinding
-import javafx.beans.binding.DoubleBinding
-import javafx.beans.property.BooleanProperty
-import javafx.beans.property.DoubleProperty
+import javafx.beans.value.ObservableValue
 import javafx.scene.Node
 import javafx.scene.Parent
 
 // ===============================================================
 // DisabledProperty
 
-fun <T: Node> T.bindDisabled(property: BooleanProperty) {
-    disableProperty().bind(property)
-}
-
-fun <T: Node> T.bindDisabled(binding: BooleanBinding) {
-    disableProperty().bind(binding)
+fun <T: Node> T.bindDisabled(observable: ObservableValue<Boolean>) {
+    disableProperty().bind(observable)
 }
 
 // ===============================================================
 // LayoutProperties
 
-fun <T: Node> T.bindLayoutX(property: DoubleProperty) {
-    layoutXProperty().bind(property)
+fun <T: Node> T.bindLayoutX(observable: ObservableValue<Number>) {
+    layoutXProperty().bind(observable)
 }
 
-fun <T: Node> T.bindLayoutX(binding: DoubleBinding) {
-    layoutXProperty().bind(binding)
-}
-
-fun <T: Node> T.bindLayoutY(property: DoubleProperty) {
-    layoutYProperty().bind(property)
-}
-
-fun <T: Node> T.bindLayoutY(binding: DoubleBinding) {
-    layoutYProperty().bind(binding)
+fun <T: Node> T.bindLayoutY(observable: ObservableValue<Number>) {
+    layoutYProperty().bind(observable)
 }
 
 // ===============================================================
 // OpacityProperty
 
-fun <T: Node> T.bindOpacity(property: DoubleProperty) {
-    opacityProperty().bind(property)
-}
-
-fun <T: Node> T.bindOpacity(binding: DoubleBinding) {
-    opacityProperty().bind(binding)
+fun <T: Node> T.bindOpacity(observable: ObservableValue<Number>) {
+    opacityProperty().bind(observable)
 }
 
 // ===============================================================
 // PickOnBoundsProperty
 
-fun <T: Node> T.bindPickOnBounds(property: BooleanProperty) {
-    pickOnBoundsProperty().bind(property)
-}
-
-fun <T: Node> T.bindPickOnBounds(binding: BooleanBinding) {
-    pickOnBoundsProperty().bind(binding)
+fun <T: Node> T.bindPickOnBounds(observable: ObservableValue<Boolean>) {
+    pickOnBoundsProperty().bind(observable)
 }
 
 // ===============================================================
 // RotateProperty
 
-fun <T: Node> T.bindRotation(property: DoubleProperty) {
-    rotateProperty().bind(property)
-}
-
-fun <T: Node> T.bindRotation(binding: DoubleBinding) {
-    rotateProperty().bind(binding)
+fun <T: Node> T.bindRotation(observable: ObservableValue<Number>) {
+    rotateProperty().bind(observable)
 }
 
 // ===============================================================
 // ScaleProperties
 
-fun <T: Node> T.bindScaleX(property: DoubleProperty) {
-    scaleXProperty().bind(property)
+fun <T: Node> T.bindScaleX(observable: ObservableValue<Number>) {
+    scaleXProperty().bind(observable)
 }
 
-fun <T: Node> T.bindScaleX(binding: DoubleBinding) {
-    scaleXProperty().bind(binding)
+fun <T: Node> T.bindScaleY(observable: ObservableValue<Number>) {
+    scaleYProperty().bind(observable)
 }
 
-fun <T: Node> T.bindScaleY(property: DoubleProperty) {
-    scaleYProperty().bind(property)
-}
-
-fun <T: Node> T.bindScaleY(binding: DoubleBinding) {
-    scaleYProperty().bind(binding)
-}
-
-fun <T: Node> T.bindScaleZ(property: DoubleProperty) {
-    scaleZProperty().bind(property)
-}
-
-fun <T: Node> T.bindScaleZ(binding: DoubleBinding) {
-    scaleZProperty().bind(binding)
+fun <T: Node> T.bindScaleZ(observable: ObservableValue<Number>) {
+    scaleZProperty().bind(observable)
 }
 
 // ===============================================================
@@ -111,48 +72,28 @@ fun <T: Parent> T.styleSheets(vararg sheets: String) {
 // ===============================================================
 // TranslateProperties
 
-fun <T: Node> T.bindTranslateX(property: DoubleProperty) {
-    translateXProperty().bind(property)
+fun <T: Node> T.bindTranslateX(observable: ObservableValue<Number>) {
+    translateXProperty().bind(observable)
 }
 
-fun <T: Node> T.bindTranslateX(binding: DoubleBinding) {
-    translateXProperty().bind(binding)
+fun <T: Node> T.bindTranslateY(observable: ObservableValue<Number>) {
+    translateYProperty().bind(observable)
 }
 
-fun <T: Node> T.bindTranslateY(property: DoubleProperty) {
-    translateYProperty().bind(property)
-}
-
-fun <T: Node> T.bindTranslateY(binding: DoubleBinding) {
-    translateYProperty().bind(binding)
-}
-
-fun <T: Node> T.bindTranslateZ(property: DoubleProperty) {
-    translateZProperty().bind(property)
-}
-
-fun <T: Node> T.bindTranslateZ(binding: DoubleBinding) {
-    translateZProperty().bind(binding)
+fun <T: Node> T.bindTranslateZ(observable: ObservableValue<Number>) {
+    translateZProperty().bind(observable)
 }
 
 // ===============================================================
 // ViewOrderProperty
 
-fun <T: Node> T.bindViewOrder(property: DoubleProperty) {
-    viewOrderProperty().bind(property)
-}
-
-fun <T: Node> T.bindViewOrder(binding: DoubleBinding) {
-    viewOrderProperty().bind(binding)
+fun <T: Node> T.bindViewOrder(observable: ObservableValue<Number>) {
+    viewOrderProperty().bind(observable)
 }
 
 // ===============================================================
 // VisibleProperty
 
-fun <T: Node> T.bindVisible(property: BooleanProperty) {
-    visibleProperty().bind(property)
-}
-
-fun <T: Node> T.bindVisible(binding: BooleanBinding) {
-    visibleProperty().bind(binding)
+fun <T: Node> T.bindVisible(observable: ObservableValue<Boolean>) {
+    visibleProperty().bind(observable)
 }
