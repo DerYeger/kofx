@@ -121,21 +121,37 @@ inline fun passwordField(binding: StringBinding, crossinline init: @FXMarker Pas
 inline fun imageView(crossinline init: @FXMarker ImageView.() -> Unit = {}) =
     Fragment { ImageView().apply(init) }
 
-inline fun imageView(image: Image, crossinline init: @FXMarker ImageView.() -> Unit = {}) =
-    Fragment { ImageView(image).apply(init) }
-
-inline fun imageView(property: ObjectProperty<Image>, crossinline init: @FXMarker ImageView.() -> Unit = {}) =
+inline fun imageView(image: Image, fit: Boolean = false, crossinline init: @FXMarker ImageView.() -> Unit = {}) =
     Fragment {
-        ImageView().apply {
-            imageProperty().bind(property)
+        ImageView(image).apply {
+            if (fit) {
+                fitWidth = image.width
+                fitHeight = image.height
+            }
             init()
         }
     }
 
-inline fun imageView(binding: ObjectBinding<Image>, crossinline init: @FXMarker ImageView.() -> Unit = {}) =
+inline fun imageView(property: ObjectProperty<Image>, fit: Boolean = false, crossinline init: @FXMarker ImageView.() -> Unit = {}) =
+    Fragment {
+        ImageView().apply {
+            imageProperty().bind(property)
+            if (fit) {
+                fitWidth = property.value.width
+                fitHeight = property.value.height
+            }
+            init()
+        }
+    }
+
+inline fun imageView(binding: ObjectBinding<Image>, fit: Boolean = false, crossinline init: @FXMarker ImageView.() -> Unit = {}) =
     Fragment {
         ImageView().apply {
             imageProperty().bind(binding)
+            if (fit) {
+                fitWidth = binding.value.width
+                fitHeight = binding.value.height
+            }
             init()
         }
     }
