@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane
 // Child scoping object
 
 object Child {
-    internal fun <T: Node> from(block: Child.() -> Fragment<T>) = block.invoke(this).instance()
+    internal fun <T: Node> from(block: Child.() -> Fragment<T>) = block(this).instance()
 }
 
 // ===============================================================
