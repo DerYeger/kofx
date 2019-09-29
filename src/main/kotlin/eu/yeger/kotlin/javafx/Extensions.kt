@@ -6,6 +6,17 @@ import javafx.scene.Node
 import javafx.scene.Parent
 
 // ===============================================================
+// DisabledProperty
+
+fun <T: Node> T.bindDisabled(property: BooleanProperty) {
+    disableProperty().bind(property)
+}
+
+fun <T: Node> T.bindDisabled(binding: BooleanBinding) {
+    disableProperty().bind(binding)
+}
+
+// ===============================================================
 // StyleClass
 
 fun <T: Node> T.styleClasses(vararg classes: String) {
@@ -17,12 +28,12 @@ fun <T: Parent> T.styleSheets(vararg sheets: String) {
 }
 
 // ===============================================================
-// Visibility
+// VisibleProperty
 
-fun <T: Node> T.bindVisibility(property: BooleanProperty) {
+fun <T: Node> T.bindVisible(property: BooleanProperty) {
     visibleProperty().bind(property)
 }
 
-fun <T: Node> T.bindVisibility(binding: BooleanBinding) {
+fun <T: Node> T.bindVisible(binding: BooleanBinding) {
     visibleProperty().bind(binding)
 }
