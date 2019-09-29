@@ -1,8 +1,6 @@
 package eu.yeger.kotlin.javafx
 
-import javafx.beans.binding.BooleanBinding
 import javafx.beans.property.*
-import javafx.scene.Node
 import kotlin.reflect.KProperty
 
 // ===============================================================
@@ -63,11 +61,11 @@ fun LongProperty.delegation() = LongDelegate(this)
 
 class LongDelegate(private val property: LongProperty) {
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value:  Long) {
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Long) {
         this.property.value = value
     }
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>):  Long = this.property.value
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): Long = this.property.value
 }
 
 // ===============================================================
@@ -77,11 +75,11 @@ fun DoubleProperty.delegation() = DoubleDelegate(this)
 
 class DoubleDelegate(private val property: DoubleProperty) {
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value:  Double) {
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Double) {
         this.property.value = value
     }
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>):  Double = this.property.value
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): Double = this.property.value
 }
 
 // ===============================================================
@@ -91,9 +89,9 @@ fun FloatProperty.delegation() = FloatDelegate(this)
 
 class FloatDelegate(private val property: FloatProperty) {
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value:  Float) {
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Float) {
         this.property.value = value
     }
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>):  Float = this.property.value
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): Float = this.property.value
 }

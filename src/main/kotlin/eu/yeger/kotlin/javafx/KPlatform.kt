@@ -5,7 +5,7 @@ import java.util.concurrent.CountDownLatch
 
 object KPlatform {
 
-    inline fun runOnFXThread(crossinline block: () -> Unit ) {
+    inline fun runOnFXThread(crossinline block: () -> Unit) {
         if (Platform.isFxApplicationThread()) {
             block()
         } else {
@@ -13,7 +13,7 @@ object KPlatform {
         }
     }
 
-    inline fun runAndWait(crossinline block: () -> Unit ) {
+    inline fun runAndWait(crossinline block: () -> Unit) {
         val latch = CountDownLatch(1)
         runOnFXThread {
             try {
@@ -25,7 +25,7 @@ object KPlatform {
         latch.await()
     }
 
-    inline fun <T> callAndWait(crossinline block: () -> T ): T? {
+    inline fun <T> callAndWait(crossinline block: () -> T): T? {
         val latch = CountDownLatch(1)
         var result: T? = null
         runOnFXThread {

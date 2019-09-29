@@ -304,8 +304,8 @@ class FragmentTests : ApplicationTest() {
         }
 
         @Test
-        fun`test FragmentException when creating multiple instances of SingletonFragment`() {
-            val singleButtonFragment =Button("IncludedButton").asSingletonFragment()
+        fun `test FragmentException when creating multiple instances of SingletonFragment`() {
+            val singleButtonFragment = Button("IncludedButton").asSingletonFragment()
             val container = vBox {
                 child { singleButtonFragment }
             }.instance()

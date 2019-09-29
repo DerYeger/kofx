@@ -31,7 +31,11 @@ class PropertyTests {
 
         @Test
         fun `test SimpleMapProperty delegation`() {
-            testConfiguration(SimpleMapProperty<Int, Int>(), ObservableMapWrapper(mapOf(0 to 1)), ObservableMapWrapper(mapOf(1 to 2)))
+            testConfiguration(
+                SimpleMapProperty<Int, Int>(),
+                ObservableMapWrapper(mapOf(0 to 1)),
+                ObservableMapWrapper(mapOf(1 to 2))
+            )
         }
 
         @Test

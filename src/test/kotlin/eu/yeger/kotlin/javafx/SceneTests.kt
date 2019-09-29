@@ -34,7 +34,7 @@ class SceneTests : ApplicationTest() {
                 }
             }
         }
-        primaryStage.apply{
+        primaryStage.apply {
             this.scene = scene
             sizeToScene()
         }.apply {

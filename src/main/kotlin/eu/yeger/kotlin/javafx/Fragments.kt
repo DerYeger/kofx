@@ -19,13 +19,13 @@ import javafx.scene.shape.Rectangle
 // ===============================================================
 // Fragment
 
-open class Fragment<out T: Node>(private val builder: () -> T) {
+open class Fragment<out T : Node>(private val builder: () -> T) {
     open fun instance() = builder()
 }
 
 class FragmentException(message: String) : Exception(message)
 
-class SingletonFragment<out T: Node>(private val node: T) : Fragment<T>({ node }) {
+class SingletonFragment<out T : Node>(private val node: T) : Fragment<T>({ node }) {
     private var consumed = false
     override fun instance() =
         if (!consumed) {
@@ -34,7 +34,7 @@ class SingletonFragment<out T: Node>(private val node: T) : Fragment<T>({ node }
         } else throw FragmentException("SingletonFragment $this has already been consumed")
 }
 
-fun <T: Node> T.asSingletonFragment() = SingletonFragment(this)
+fun <T : Node> T.asSingletonFragment() = SingletonFragment(this)
 
 // ===============================================================
 // Button
@@ -106,7 +106,10 @@ inline fun passwordField(property: StringProperty, crossinline init: @FXMarker P
         }
     }
 
-inline fun passwordField(observable: ObservableValue<String>, crossinline init: @FXMarker PasswordField.() -> Unit = {}) =
+inline fun passwordField(
+    observable: ObservableValue<String>,
+    crossinline init: @FXMarker PasswordField.() -> Unit = {}
+) =
     Fragment {
         PasswordField().apply {
             textProperty().bind(observable)
@@ -131,7 +134,11 @@ inline fun imageView(image: Image, fit: Boolean = false, crossinline init: @FXMa
         }
     }
 
-inline fun imageView(property: ObjectProperty<Image>, fit: Boolean = false, crossinline init: @FXMarker ImageView.() -> Unit = {}) =
+inline fun imageView(
+    property: ObjectProperty<Image>,
+    fit: Boolean = false,
+    crossinline init: @FXMarker ImageView.() -> Unit = {}
+) =
     Fragment {
         ImageView().apply {
             imageProperty().bind(property)
@@ -143,7 +150,11 @@ inline fun imageView(property: ObjectProperty<Image>, fit: Boolean = false, cros
         }
     }
 
-inline fun imageView(observable: ObservableValue<Image>, fit: Boolean = false, crossinline init: @FXMarker ImageView.() -> Unit = {}) =
+inline fun imageView(
+    observable: ObservableValue<Image>,
+    fit: Boolean = false,
+    crossinline init: @FXMarker ImageView.() -> Unit = {}
+) =
     Fragment {
         ImageView().apply {
             imageProperty().bind(observable)
