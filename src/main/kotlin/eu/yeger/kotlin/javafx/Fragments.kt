@@ -31,7 +31,7 @@ class SingletonFragment<out T: Node>(private val node: T) : Fragment<T>({ node }
         if (!consumed) {
             consumed = true
             node
-        } else throw FragmentException("SingletonFragment has already been consumed")
+        } else throw FragmentException("SingletonFragment $this has already been consumed")
 }
 
 fun <T: Node> T.asSingletonFragment() = SingletonFragment(this)
