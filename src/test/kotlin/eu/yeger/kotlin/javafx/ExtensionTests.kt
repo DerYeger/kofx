@@ -18,7 +18,7 @@ class ExtensionTests : ApplicationTest() {
     inner class DisabledBindingExtensionTests {
 
         @Test
-        fun testBindingDisabledToProperty() {
+        fun `test binding DisabledProperty to property`() {
             val property = SimpleBooleanProperty(false)
             val label = Label().apply {
                 bindDisabled(property)
@@ -33,7 +33,7 @@ class ExtensionTests : ApplicationTest() {
         }
 
         @Test
-        fun testBindingDisabledToBinding() {
+        fun `test binding DisabledProperty to binding`() {
             val property = SimpleBooleanProperty(false)
             val binding = createBooleanBinding(Callable { property.value }, property)
             val label = Label().apply {
@@ -53,7 +53,7 @@ class ExtensionTests : ApplicationTest() {
     inner class LayoutExtensionTests {
 
         @Test
-        fun testBindingLayoutToProperty() {
+        fun `test binding Layout to property`() {
             val propertyX = SimpleDoubleProperty(1.0)
             val propertyY = SimpleDoubleProperty(2.0)
             val label = label {
@@ -71,7 +71,7 @@ class ExtensionTests : ApplicationTest() {
         }
 
         @Test
-        fun testBindingLayoutToBinding() {
+        fun `test binding Layout to binding`() {
             val propertyX = SimpleDoubleProperty(1.0)
             val propertyY = SimpleDoubleProperty(2.0)
             val bindingX = createDoubleBinding(Callable { propertyX.value }, propertyX)
@@ -95,7 +95,7 @@ class ExtensionTests : ApplicationTest() {
     inner class OpacityExtensionTests {
 
         @Test
-        fun testBindingOpacityToProperty() {
+        fun `test binding Opacity to property`() {
             val property = SimpleDoubleProperty(100.0)
             val label = label {
                 bindOpacity(property)
@@ -107,7 +107,7 @@ class ExtensionTests : ApplicationTest() {
         }
 
         @Test
-        fun testBindingOpacityToBinding() {
+        fun `test binding Opacity to binding`() {
             val property = SimpleDoubleProperty(100.0)
             val binding = createDoubleBinding(Callable { property.value }, property)
             val label = label {
@@ -124,7 +124,7 @@ class ExtensionTests : ApplicationTest() {
     inner class PickOnBoundsBindingExtensionTests {
 
         @Test
-        fun testBindingPickOnBoundsToProperty() {
+        fun `test binding PickOnBounds to property`() {
             val property = SimpleBooleanProperty(false)
             val label = Label().apply {
                 bindPickOnBounds(property)
@@ -139,7 +139,7 @@ class ExtensionTests : ApplicationTest() {
         }
 
         @Test
-        fun testBindingPickOnBoundsToBinding() {
+        fun `test binding PickOnBounds to binding`() {
             val property = SimpleBooleanProperty(false)
             val binding = createBooleanBinding(Callable { property.value }, property)
             val label = Label().apply {
@@ -159,7 +159,7 @@ class ExtensionTests : ApplicationTest() {
     inner class RotationExtensionTests {
 
         @Test
-        fun testBindingRotationToProperty() {
+        fun `test binding Rotation to property`() {
             val property = SimpleDoubleProperty(100.0)
             val label = label {
                 bindRotation(property)
@@ -171,7 +171,7 @@ class ExtensionTests : ApplicationTest() {
         }
 
         @Test
-        fun testBindingOpacityToBinding() {
+        fun `test binding Rotation to binding`() {
             val property = SimpleDoubleProperty(100.0)
             val binding: DoubleBinding = createDoubleBinding(Callable { property.value }, property)
             val label = label {
@@ -188,7 +188,7 @@ class ExtensionTests : ApplicationTest() {
     inner class ScaleExtensionTests {
 
         @Test
-        fun testBindingScaleToProperty() {
+        fun `test binding Scale to property`() {
             val propertyX = SimpleDoubleProperty(1.0)
             val propertyY = SimpleDoubleProperty(2.0)
             val propertyZ = SimpleDoubleProperty(2.0)
@@ -211,7 +211,7 @@ class ExtensionTests : ApplicationTest() {
         }
 
         @Test
-        fun testBindingScaleToBinding() {
+        fun `test binding Scale to binding`() {
             val propertyX = SimpleDoubleProperty(1.0)
             val propertyY = SimpleDoubleProperty(2.0)
             val propertyZ = SimpleDoubleProperty(2.0)
@@ -241,7 +241,7 @@ class ExtensionTests : ApplicationTest() {
     inner class StyleExtensionTests {
 
         @Test
-        fun testStyleClassExtension() {
+        fun `test adding StyleClasses`() {
             val label = label {
                 styleClasses("first", "second")
             }.instance()
@@ -249,7 +249,7 @@ class ExtensionTests : ApplicationTest() {
         }
 
         @Test
-        fun testStyleSheetExtension() {
+        fun `test adding StyleSheets`() {
             val label = label {
                 styleSheets("first", "second")
             }.instance()
@@ -261,7 +261,7 @@ class ExtensionTests : ApplicationTest() {
     inner class TranslateExtensionTests {
 
         @Test
-        fun testBindingTranslateToProperty() {
+        fun `test binding Translation to property`() {
             val propertyX = SimpleDoubleProperty(1.0)
             val propertyY = SimpleDoubleProperty(2.0)
             val propertyZ = SimpleDoubleProperty(2.0)
@@ -284,7 +284,7 @@ class ExtensionTests : ApplicationTest() {
         }
 
         @Test
-        fun testBindingTranslateToBinding() {
+        fun `test binding Translation to binding`() {
             val propertyX = SimpleDoubleProperty(1.0)
             val propertyY = SimpleDoubleProperty(2.0)
             val propertyZ = SimpleDoubleProperty(2.0)
@@ -314,7 +314,7 @@ class ExtensionTests : ApplicationTest() {
     inner class ViewOrderExtensionTests {
 
         @Test
-        fun testBindingViewOrderToProperty() {
+        fun `test binding ViewOrder to property`() {
             val property = SimpleDoubleProperty(100.0)
             val label = label {
                 bindViewOrder(property)
@@ -326,7 +326,7 @@ class ExtensionTests : ApplicationTest() {
         }
 
         @Test
-        fun testBindingViewOrderToBinding() {
+        fun `test binding ViewOrder to binding`() {
             val property = SimpleDoubleProperty(100.0)
             val binding: DoubleBinding = createDoubleBinding(Callable { property.value }, property)
             val label = label {
@@ -343,7 +343,7 @@ class ExtensionTests : ApplicationTest() {
     inner class VisibleBindingExtensionTests {
 
         @Test
-        fun testBindingVisibleToProperty() {
+        fun `test binding VisibleProperty to property`() {
             val property = SimpleBooleanProperty(false)
             val label = Label().apply {
                 bindVisible(property)
@@ -358,7 +358,7 @@ class ExtensionTests : ApplicationTest() {
         }
 
         @Test
-        fun testBindingVisibleToBinding() {
+        fun `test binding VisibleProperty to binding`() {
             val property = SimpleBooleanProperty(false)
             val binding = createBooleanBinding(Callable { property.value }, property)
             val label = Label().apply {

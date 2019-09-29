@@ -25,22 +25,22 @@ class PropertyTests {
         }
 
         @Test
-        fun testSimpleStringProperty() {
+        fun `test SimpleStringProperty delegation`() {
             testConfiguration(SimpleStringProperty(), "First", "Second")
         }
 
         @Test
-        fun testSimpleMapProperty() {
+        fun `test SimpleMapProperty delegation`() {
             testConfiguration(SimpleMapProperty<Int, Int>(), ObservableMapWrapper(mapOf(0 to 1)), ObservableMapWrapper(mapOf(1 to 2)))
         }
 
         @Test
-        fun testSimpleObjectProperty() {
+        fun `test SimpleObjectProperty delegation`() {
             testConfiguration(SimpleObjectProperty<Pair<Int, Int>>(), 0 to 1, 1 to 2)
         }
 
         @Test
-        fun testSimpleObjectPropertyWithNullValues() {
+        fun `test nullable SimpleObjectProperty delegation`() {
             testConfiguration(SimpleObjectProperty<Pair<Int, Int>>(), 0 to 1, null)
         }
     }
@@ -59,12 +59,12 @@ class PropertyTests {
         }
 
         @Test
-        fun testSimpleBooleanProperty() {
+        fun `test SimpleBooleanProperty delegation`() {
             testConfiguration(SimpleBooleanProperty(), rand.nextBoolean(), rand.nextBoolean())
         }
 
         @Test
-        fun testFlipExtension() {
+        fun `test BooleanProperty flip extension`() {
             val property = SimpleBooleanProperty(false)
             val value by property.delegation()
             assertFalse(value)
@@ -90,7 +90,7 @@ class PropertyTests {
         }
 
         @Test
-        fun testSimpleIntegerProperty() {
+        fun `test SimpleIntegerProperty delegation`() {
             testConfiguration(SimpleIntegerProperty(), rand.nextInt(), rand.nextInt())
         }
     }
@@ -109,7 +109,7 @@ class PropertyTests {
         }
 
         @Test
-        fun testSimpleLongProperty() {
+        fun `test SimpleLongProperty delegation`() {
             testConfiguration(SimpleLongProperty(), rand.nextLong(), rand.nextLong())
         }
     }
@@ -128,7 +128,7 @@ class PropertyTests {
         }
 
         @Test
-        fun testSimpleDoubleProperty() {
+        fun `test SimpleDoubleProperty delegation`() {
             testConfiguration(SimpleDoubleProperty(), rand.nextDouble(), rand.nextDouble())
         }
     }
@@ -147,7 +147,7 @@ class PropertyTests {
         }
 
         @Test
-        fun testSimpleFloatProperty() {
+        fun `test SimpleFloatProperty delegation`() {
             testConfiguration(SimpleFloatProperty(), rand.nextFloat(), rand.nextFloat())
         }
     }

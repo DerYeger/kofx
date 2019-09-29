@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane
 // Child scoping object
 
 object Child {
-    internal fun <T: Node> from(block: Child.() -> Fragment<T>) = block(this).instance()
+    internal fun <T: Node> from(block: @FXMarker Child.() -> Fragment<T>) = block(this).instance()
 }
 
 // ===============================================================
@@ -16,6 +16,10 @@ object Child {
 
 infix fun <T: Pane, U: Node> T.child(block: @FXMarker Child.() -> Fragment<U>): U =
     Child.from(block).also { children.add(it) }
+
+fun <T: Pane, U: Node> T.children(vararg fragments: Fragment<U>) {
+    fragments.map { it.instance() }.forEach { children.add(it) }
+}
 
 // ===============================================================
 // GridPane

@@ -45,7 +45,7 @@ class SceneTests : ApplicationTest() {
     }
 
     @Test
-    fun testClickCounter() {
+    fun `test ClickCounter example application`() {
         val label = lookup("0").queryLabeled()
         assertThat(label).hasText("0")
         clickOn(lookup("My Button").queryButton())
@@ -53,11 +53,13 @@ class SceneTests : ApplicationTest() {
     }
 
     @Test
-    fun testSimpleScene() {
+    fun `test simple Scene creation`() {
         val root = scene {
             hBox {
-                child { label("First") }
-                child { button("Second") }
+                children(
+                    label("First"),
+                    button("Second")
+                )
             }
         }.root as HBox
         assertThat(root).hasExactlyNumChildren(2)

@@ -17,7 +17,7 @@ class AlertTests : ApplicationTest() {
     inner class AlertTest {
 
         @Test
-        fun testAlertAlreadyActiveException() {
+        fun `test AlertAlreadyActive Exception`() {
             val alert = object : Alert() {
                 override fun build() = Scene(Label("Alert"))
             }
@@ -36,7 +36,7 @@ class AlertTests : ApplicationTest() {
     inner class InformationAlertTests {
 
         @Test
-        fun testConfirmButtonClicked() {
+        fun `test ConfirmButton clicked`() {
             var confirmed = false
             runAndWait {
                 informationAlert {
@@ -57,7 +57,7 @@ class AlertTests : ApplicationTest() {
     inner class ConfirmationAlertTests {
 
         @Test
-        fun testConfirmButtonClicked() {
+        fun `test ConfirmButton clicked`() {
             var confirmed = false
             runAndWait {
                 confirmationAlert {
@@ -72,7 +72,7 @@ class AlertTests : ApplicationTest() {
         }
 
         @Test
-        fun testCancelButtonClicked() {
+        fun `test CancelButton clicked`() {
             var confirmed = false
             runAndWait {
                 confirmationAlert {

@@ -17,7 +17,7 @@ class KPlatformTests : ApplicationTest() {
     inner class RunOnFXThreadTests {
 
         @Test
-        fun testRunOnFXThreadOnWorkerThread() {
+        fun `test runOnFXThread on non-FX-thread`() {
             var ran = false
             assertFalse(Platform.isFxApplicationThread())
             runOnFXThread {
@@ -29,7 +29,7 @@ class KPlatformTests : ApplicationTest() {
         }
 
         @Test
-        fun testRunOnFXThreadOnFXThread() {
+        fun `test runOnFXThread on FX-thread`() {
             Platform.runLater {
                 var ran = false
                 assertTrue(Platform.isFxApplicationThread())
@@ -46,7 +46,7 @@ class KPlatformTests : ApplicationTest() {
     inner class RunAndWaitTests {
 
         @Test
-        fun testRunAndWaitOnWorkerThread() {
+        fun `test runAndWait on non-FX-thread`() {
             var ran = false
             assertFalse(Platform.isFxApplicationThread())
             runAndWait {
@@ -57,7 +57,7 @@ class KPlatformTests : ApplicationTest() {
         }
 
         @Test
-        fun testRunAndWaitOnFXThread() {
+        fun `test runAndWait on FX-thread`() {
             Platform.runLater {
                 var ran = false
                 assertTrue(Platform.isFxApplicationThread())
@@ -74,7 +74,7 @@ class KPlatformTests : ApplicationTest() {
     inner class CallAndWaitTests {
 
         @Test
-        fun testCallAndWaitOnWorkerThread() {
+        fun `test callAndWait on non-FX-thread`() {
             assertFalse(Platform.isFxApplicationThread())
             val ran: Boolean? = callAndWait {
                 assertTrue(Platform.isFxApplicationThread())
@@ -84,7 +84,7 @@ class KPlatformTests : ApplicationTest() {
         }
 
         @Test
-        fun testCallAndWaitOnFXThread() {
+        fun `test callAndWait on FX-thread`() {
             Platform.runLater {
                 assertTrue(Platform.isFxApplicationThread())
                 val ran: Boolean? = callAndWait {
