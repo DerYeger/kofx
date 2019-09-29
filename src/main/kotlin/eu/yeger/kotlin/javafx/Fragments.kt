@@ -1,6 +1,8 @@
 package eu.yeger.kotlin.javafx
 
+import javafx.beans.binding.ObjectBinding
 import javafx.beans.binding.StringBinding
+import javafx.beans.property.ObjectProperty
 import javafx.beans.property.StringProperty
 import javafx.scene.Node
 import javafx.scene.control.Button
@@ -53,10 +55,10 @@ inline fun label(crossinline init: @FXMarker Label.() -> Unit = {}) =
 inline fun label(text: String, crossinline init: @FXMarker Label.() -> Unit = {}) =
     Fragment { Label(text).apply(init) }
 
-inline fun label(binding: StringProperty, crossinline init: @FXMarker Label.() -> Unit = {}) =
+inline fun label(property: StringProperty, crossinline init: @FXMarker Label.() -> Unit = {}) =
     Fragment {
         Label().apply {
-            textProperty().bind(binding)
+            textProperty().bind(property)
             init()
         }
     }
@@ -75,10 +77,10 @@ inline fun label(binding: StringBinding, crossinline init: @FXMarker Label.() ->
 inline fun textField(crossinline init: @FXMarker TextField.() -> Unit = {}) =
     Fragment { TextField().apply(init) }
 
-inline fun textField(binding: StringProperty, crossinline init: @FXMarker TextField.() -> Unit = {}) =
+inline fun textField(property: StringProperty, crossinline init: @FXMarker TextField.() -> Unit = {}) =
     Fragment {
         TextField().apply {
-            textProperty().bindBidirectional(binding)
+            textProperty().bindBidirectional(property)
             init()
         }
     }
@@ -97,10 +99,10 @@ inline fun textField(binding: StringBinding, crossinline init: @FXMarker TextFie
 inline fun passwordField(crossinline init: @FXMarker PasswordField.() -> Unit = {}) =
     Fragment { PasswordField().apply(init) }
 
-inline fun passwordField(binding: StringProperty, crossinline init: @FXMarker PasswordField.() -> Unit = {}) =
+inline fun passwordField(property: StringProperty, crossinline init: @FXMarker PasswordField.() -> Unit = {}) =
     Fragment {
         PasswordField().apply {
-            textProperty().bindBidirectional(binding)
+            textProperty().bindBidirectional(property)
             init()
         }
     }
@@ -121,6 +123,22 @@ inline fun imageView(crossinline init: @FXMarker ImageView.() -> Unit = {}) =
 
 inline fun imageView(image: Image, crossinline init: @FXMarker ImageView.() -> Unit = {}) =
     Fragment { ImageView(image).apply(init) }
+
+inline fun imageView(property: ObjectProperty<Image>, crossinline init: @FXMarker ImageView.() -> Unit = {}) =
+    Fragment {
+        ImageView().apply {
+            imageProperty().bind(property)
+            init()
+        }
+    }
+
+inline fun imageView(binding: ObjectBinding<Image>, crossinline init: @FXMarker ImageView.() -> Unit = {}) =
+    Fragment {
+        ImageView().apply {
+            imageProperty().bind(binding)
+            init()
+        }
+    }
 
 // ===============================================================
 // Rectangle

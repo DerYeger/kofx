@@ -1,10 +1,14 @@
 package eu.yeger.kotlin.javafx
 
 import com.sun.javafx.collections.ObservableMapWrapper
+import javafx.beans.binding.Bindings.createBooleanBinding
 import javafx.beans.property.*
+import javafx.scene.control.Label
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.testfx.framework.junit5.ApplicationTest
+import java.util.concurrent.Callable
 import java.util.concurrent.ThreadLocalRandom
 
 class PropertyTests {
@@ -46,7 +50,7 @@ class PropertyTests {
     }
 
     @Nested
-    inner class BooleanPropertyTests {
+    inner class BooleanPropertyTests : ApplicationTest() {
         private fun testConfiguration(property: BooleanProperty, first: Boolean, second: Boolean) {
             var delegate by property.delegation()
             assertEquals(property.value, delegate)
@@ -73,6 +77,37 @@ class PropertyTests {
             assertTrue(value)
 
             assertFalse(property.flipped())
+        }
+
+        @Test
+        fun testBindingVisibilityToProperty() {
+            val property = SimpleBooleanProperty(false)
+            val label = Label().apply {
+                bindVisibility(property)
+            }
+            assertEquals(property.value, label.isVisible)
+
+            property.flip()
+            assertEquals(property.value, label.isVisible)
+
+            property.flip()
+            assertEquals(property.value, label.isVisible)
+        }
+
+        @Test
+        fun testBindingVisibilityToBinding() {
+            val property = SimpleBooleanProperty(false)
+            val binding = createBooleanBinding(Callable { property.value }, property)
+            val label = Label().apply {
+                bindVisibility(binding)
+            }
+            assertEquals(property.value, label.isVisible)
+
+            property.flip()
+            assertEquals(property.value, label.isVisible)
+
+            property.flip()
+            assertEquals(property.value, label.isVisible)
         }
     }
 

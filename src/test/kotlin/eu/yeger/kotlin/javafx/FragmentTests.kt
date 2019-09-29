@@ -1,9 +1,15 @@
 package eu.yeger.kotlin.javafx
 
+import io.mockk.mockk
+import javafx.beans.binding.Bindings
+import javafx.beans.binding.Bindings.createObjectBinding
+import javafx.beans.binding.ObjectBinding
 import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.scene.control.Button
 import javafx.scene.control.Label
+import javafx.scene.image.Image
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -58,12 +64,22 @@ class FragmentTests : ApplicationTest() {
         }
 
         @Test
-        fun testLabelWithBinding() {
+        fun testLabelWithProperty() {
             val property = SimpleStringProperty("First")
             val label = label(property).instance()
             assertThat(label).hasText("First")
             property.value = "Second"
             assertThat(label).hasText("Second")
+        }
+
+        @Test
+        fun testLabelWithBinding() {
+            val property = SimpleIntegerProperty(0)
+            val label = label(property.asString()).instance()
+            assertEquals(property.value.toString(), label.text)
+
+            property.value = 1
+            assertEquals(property.value.toString(), label.text)
         }
     }
 
@@ -134,6 +150,68 @@ class FragmentTests : ApplicationTest() {
 
             property.value = 1
             assertEquals(property.value.toString(), passwordField.text)
+        }
+    }
+
+    @Nested
+    inner class ImageViewTests {
+
+        private val mockImage = mockk<Image>(relaxed = true)
+
+        @Test
+        fun testSimpleImageView() {
+            val imageView = imageView {
+                image = mockImage
+            }.instance()
+            assertEquals(mockImage, imageView.image)
+        }
+
+        @Test
+        fun testSimpleImageWithParam() {
+            val imageView = imageView(mockImage).instance()
+            assertEquals(mockImage, imageView.image)
+        }
+
+        @Test
+        fun testSimpleImageViewWithProperty() {
+            val property = SimpleObjectProperty<Image>(mockImage)
+            val imageView = imageView(property).instance()
+            assertEquals(mockImage, imageView.image)
+        }
+
+        @Test
+        fun testSimpleObjectViewWithBinding() {
+            val binding = createObjectBinding({ mockImage }, null)
+            val imageView = imageView(binding).instance()
+            assertEquals(mockImage, imageView.image)
+        }
+    }
+
+    @Nested
+    inner class RectangleTests {
+
+        @Test
+        fun testSimpleRectangle() {
+            val rec = rectangle {
+                width = 100.0
+                height = 50.0
+            }.instance()
+            assertEquals(100.0, rec.width)
+            assertEquals(50.0, rec.height)
+        }
+
+        @Test
+        fun testRectangleWithParams() {
+            val rec = rectangle(100.0, 50.0).instance()
+            assertEquals(100.0, rec.width)
+            assertEquals(50.0, rec.height)
+        }
+
+        @Test
+        fun testSquareRectangleWithParams() {
+            val rec = rectangle(100.0).instance()
+            assertEquals(100.0, rec.width)
+            assertEquals(100.0, rec.height)
         }
     }
 
