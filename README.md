@@ -1,9 +1,9 @@
 # kotlin.javafx
 
-![License](https://img.shields.io/github/license/deryeger/kotlin.javafx?style=for-the-badge)
-![Travis](https://img.shields.io/travis/com/deryeger/kotlin.javafx?style=for-the-badge)
-![Coverage](https://img.shields.io/codecov/c/github/deryeger/kotlin.javafx?style=for-the-badge)
-
+[![License](https://img.shields.io/github/license/deryeger/kotlin.javafx?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![Travis](https://img.shields.io/travis/com/deryeger/kotlin.javafx?style=for-the-badge)](https://travis-ci.com/DerYeger/kotlin.javafx)
+[![JitPack](https://img.shields.io/jitpack/v/github/deryeger/kotlin.javafx?color=blue&style=for-the-badge)](https://jitpack.io/#eu.yeger/kotlin.javafx)
+[![Coverage](https://img.shields.io/codecov/c/github/deryeger/kotlin.javafx?style=for-the-badge)](https://codecov.io/gh/DerYeger/kotlin.javafx)
 
 A library for easier JavaFX development in combination with Kotlin.
 
