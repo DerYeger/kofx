@@ -22,6 +22,7 @@ class KPlatformTests : ApplicationTest() {
             assertFalse(Platform.isFxApplicationThread())
             runOnFXThread {
                 assertTrue(Platform.isFxApplicationThread())
+                sleep(100)
                 ran = true
             }
             WaitForAsyncUtils.waitForFxEvents()
@@ -35,10 +36,12 @@ class KPlatformTests : ApplicationTest() {
                 assertTrue(Platform.isFxApplicationThread())
                 runOnFXThread {
                     assertTrue(Platform.isFxApplicationThread())
+                    sleep(100)
                     ran = true
                 }
                 assertTrue(ran)
             }
+            WaitForAsyncUtils.waitForFxEvents()
         }
     }
 
@@ -51,6 +54,7 @@ class KPlatformTests : ApplicationTest() {
             assertFalse(Platform.isFxApplicationThread())
             runAndWait {
                 assertTrue(Platform.isFxApplicationThread())
+                sleep(100)
                 ran = true
             }
             assertTrue(ran)
@@ -63,10 +67,12 @@ class KPlatformTests : ApplicationTest() {
                 assertTrue(Platform.isFxApplicationThread())
                 runAndWait {
                     assertTrue(Platform.isFxApplicationThread())
+                    sleep(100)
                     ran = true
                 }
                 assertTrue(ran)
             }
+            WaitForAsyncUtils.waitForFxEvents()
         }
     }
 
@@ -78,6 +84,7 @@ class KPlatformTests : ApplicationTest() {
             assertFalse(Platform.isFxApplicationThread())
             val ran: Boolean? = callAndWait {
                 assertTrue(Platform.isFxApplicationThread())
+                sleep(100)
                 true
             }
             assertTrue(ran!!)
@@ -89,10 +96,12 @@ class KPlatformTests : ApplicationTest() {
                 assertTrue(Platform.isFxApplicationThread())
                 val ran: Boolean? = callAndWait {
                     assertTrue(Platform.isFxApplicationThread())
+                    sleep(100)
                     true
                 }
                 assertTrue(ran!!)
             }
+            WaitForAsyncUtils.waitForFxEvents()
         }
     }
 }

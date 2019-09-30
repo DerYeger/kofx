@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'eu.yeger'
-version '0.1.0'
+version '0.1.2'
 
 sourceCompatibility = 12
 targetCompatibility = 12
