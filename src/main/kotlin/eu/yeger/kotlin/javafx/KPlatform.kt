@@ -26,16 +26,10 @@ object KPlatform {
     }
 
     inline fun <T> callAndWait(crossinline block: () -> T): T? {
-        val latch = CountDownLatch(1)
         var result: T? = null
-        runOnFXThread {
-            try {
-                result = block()
-            } finally {
-                latch.countDown()
-            }
+        runAndWait {
+            result = block()
         }
-        latch.await()
         return result
     }
 }
