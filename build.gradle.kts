@@ -44,11 +44,11 @@ dependencies {
 
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = "12"
+        kotlinOptions.jvmTarget = javaVersion.toString()
     }
 
     compileTestKotlin {
-        kotlinOptions.jvmTarget = "12"
+        kotlinOptions.jvmTarget = javaVersion.toString()
     }
 
     jacocoTestReport {
