@@ -22,7 +22,7 @@ java {
 
 javafx {
     version = javaVersion.toString()
-    modules = listOf( "javafx.controls" )
+    modules = listOf("javafx.controls")
 }
 
 repositories {
