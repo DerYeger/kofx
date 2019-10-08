@@ -1,4 +1,4 @@
-# kotlin.javafx
+# kofx
 
 [![License](https://img.shields.io/github/license/deryeger/kofx?color=green&style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Travis](https://img.shields.io/travis/com/deryeger/kofx?color=green&style=for-the-badge)](https://travis-ci.com/DerYeger/kotlin.javafx)
