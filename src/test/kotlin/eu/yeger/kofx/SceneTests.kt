@@ -1,4 +1,4 @@
-package eu.yeger.kotlin.javafx
+package eu.yeger.kofx
 
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.scene.control.Button

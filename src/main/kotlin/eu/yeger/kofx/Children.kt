@@ -1,4 +1,4 @@
-package eu.yeger.kotlin.javafx
+package eu.yeger.kofx
 
 import javafx.scene.Node
 import javafx.scene.layout.GridPane

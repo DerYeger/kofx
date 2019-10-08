@@ -1,4 +1,4 @@
-package eu.yeger.kotlin.javafx
+package eu.yeger.kofx
 
 import javafx.beans.binding.Bindings.createBooleanBinding
 import javafx.beans.binding.Bindings.createDoubleBinding

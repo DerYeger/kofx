@@ -1,6 +1,6 @@
-package eu.yeger.kotlin.javafx.alert
+package eu.yeger.kofx.alert
 
-import eu.yeger.kotlin.javafx.*
+import eu.yeger.kofx.*
 import javafx.event.ActionEvent
 import javafx.geometry.Insets
 import javafx.geometry.Pos

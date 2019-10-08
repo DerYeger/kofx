@@ -1,6 +1,6 @@
-package eu.yeger.kotlin.javafx.alert
+package eu.yeger.kofx.alert
 
-import eu.yeger.kotlin.javafx.KPlatform.runAndWait
+import eu.yeger.kofx.KPlatform.runAndWait
 import javafx.scene.Node
 import javafx.scene.Scene
 import javafx.scene.control.Label

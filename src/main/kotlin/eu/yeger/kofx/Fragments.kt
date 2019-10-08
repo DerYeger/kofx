@@ -1,4 +1,4 @@
-package eu.yeger.kotlin.javafx
+package eu.yeger.kofx
 
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.StringProperty
@@ -175,7 +175,8 @@ inline fun rectangle(crossinline init: @FXMarker Rectangle.() -> Unit = {}) =
 inline fun rectangle(width: Double, height: Double, crossinline init: @FXMarker Rectangle.() -> Unit = {}) =
     Fragment { Rectangle(width, height).apply(init) }
 
-inline fun rectangle(size: Double, crossinline init: @FXMarker Rectangle.() -> Unit = {}) = rectangle(size, size, init)
+inline fun rectangle(size: Double, crossinline init: @FXMarker Rectangle.() -> Unit = {}) =
+    rectangle(size, size, init)
 
 // ===============================================================
 // HBox

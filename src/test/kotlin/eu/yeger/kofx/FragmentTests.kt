@@ -1,4 +1,4 @@
-package eu.yeger.kotlin.javafx
+package eu.yeger.kofx
 
 import io.mockk.mockk
 import javafx.beans.binding.Bindings.createObjectBinding

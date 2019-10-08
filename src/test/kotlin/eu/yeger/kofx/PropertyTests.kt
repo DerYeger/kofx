@@ -1,4 +1,4 @@
-package eu.yeger.kotlin.javafx
+package eu.yeger.kofx
 
 import com.sun.javafx.collections.ObservableMapWrapper
 import javafx.beans.property.*

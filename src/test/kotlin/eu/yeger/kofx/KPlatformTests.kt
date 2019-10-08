@@ -1,8 +1,8 @@
-package eu.yeger.kotlin.javafx
+package eu.yeger.kofx
 
-import eu.yeger.kotlin.javafx.KPlatform.callAndWait
-import eu.yeger.kotlin.javafx.KPlatform.runAndWait
-import eu.yeger.kotlin.javafx.KPlatform.runOnFXThread
+import eu.yeger.kofx.KPlatform.callAndWait
+import eu.yeger.kofx.KPlatform.runAndWait
+import eu.yeger.kofx.KPlatform.runOnFXThread
 import javafx.application.Platform
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
