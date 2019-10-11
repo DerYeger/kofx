@@ -1,6 +1,7 @@
 package eu.yeger.kofx
 
 import javafx.beans.value.ObservableValue
+import javafx.css.Styleable
 import javafx.scene.Node
 import javafx.scene.Parent
 
@@ -67,6 +68,14 @@ fun <T : Node> T.styleClasses(vararg classes: String) {
 
 fun <T : Parent> T.styleSheets(vararg sheets: String) {
     stylesheets.addAll(sheets)
+}
+
+fun Styleable.bindStyleClass(observable: ObservableValue<String?>) {
+    observable.value?.let { styleClass.add(it) }
+    observable.addListener { _, oldValue, newValue ->
+        styleClass.remove(oldValue)
+        newValue?.let { styleClass.add(it) }
+    }
 }
 
 // ===============================================================

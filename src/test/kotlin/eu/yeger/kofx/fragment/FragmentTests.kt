@@ -1,5 +1,6 @@
-package eu.yeger.kofx
+package eu.yeger.kofx.fragment
 
+import eu.yeger.kofx.fragment.*
 import io.mockk.mockk
 import javafx.beans.binding.Bindings.createObjectBinding
 import javafx.beans.property.SimpleIntegerProperty
