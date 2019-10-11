@@ -1,4 +1,4 @@
-package eu.yeger.kotlin.javafx.alert
+package eu.yeger.kofx.alert
 
 import javafx.scene.Scene
 import javafx.stage.Stage

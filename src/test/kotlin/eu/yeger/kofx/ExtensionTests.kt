@@ -1,5 +1,7 @@
-package eu.yeger.kotlin.javafx
+package eu.yeger.kofx
 
+import eu.yeger.kofx.fragment.label
+import eu.yeger.kofx.property.flip
 import javafx.beans.binding.Bindings.createBooleanBinding
 import javafx.beans.binding.Bindings.createDoubleBinding
 import javafx.beans.binding.DoubleBinding

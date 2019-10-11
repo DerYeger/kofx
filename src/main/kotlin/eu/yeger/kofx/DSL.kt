@@ -1,5 +1,6 @@
-package eu.yeger.kotlin.javafx
+package eu.yeger.kofx
 
+import eu.yeger.kofx.fragment.Fragment
 import javafx.scene.Parent
 import javafx.scene.Scene
 

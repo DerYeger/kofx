@@ -1,4 +1,4 @@
-package eu.yeger.kotlin.javafx
+package eu.yeger.kofx.property
 
 import com.sun.javafx.collections.ObservableMapWrapper
 import javafx.beans.property.*
@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import java.util.concurrent.ThreadLocalRandom
 
-class PropertyTests {
+class PropertyDelegateTests {
 
     private val rand = ThreadLocalRandom.current()
 
     @Nested
-    inner class GenericPropertyTests {
+    inner class GenericPropertyDelegateTests {
         private fun <T> testConfiguration(property: Property<T>, first: T, second: T) {
-            var delegate by property.delegation()
+            var delegate by property.delegate()
             assertEquals(property.value, delegate)
 
             delegate = first
@@ -26,7 +26,7 @@ class PropertyTests {
 
         @Test
         fun `test SimpleStringProperty delegation`() {
-            testConfiguration(SimpleStringProperty(), "First", "Second")
+            testConfiguration(stringProperty(null), "First", "Second")
         }
 
         @Test
@@ -40,19 +40,19 @@ class PropertyTests {
 
         @Test
         fun `test SimpleObjectProperty delegation`() {
-            testConfiguration(SimpleObjectProperty<Pair<Int, Int>>(), 0 to 1, 1 to 2)
+            testConfiguration(objectProperty<Pair<Int, Int>>(0 to 1), 1 to 2, 2 to 3)
         }
 
         @Test
         fun `test nullable SimpleObjectProperty delegation`() {
-            testConfiguration(SimpleObjectProperty<Pair<Int, Int>>(), 0 to 1, null)
+            testConfiguration(objectProperty<Pair<Int, Int>?>(0 to 1), 1 to 2, null)
         }
     }
 
     @Nested
-    inner class BooleanPropertyTests {
+    inner class BooleanPropertyDelegateTests {
         private fun testConfiguration(property: BooleanProperty, first: Boolean, second: Boolean) {
-            var delegate by property.delegation()
+            var delegate by property.delegate()
             assertEquals(property.value, delegate)
 
             delegate = first
@@ -64,13 +64,13 @@ class PropertyTests {
 
         @Test
         fun `test SimpleBooleanProperty delegation`() {
-            testConfiguration(SimpleBooleanProperty(), rand.nextBoolean(), rand.nextBoolean())
+            testConfiguration(booleanProperty(false), rand.nextBoolean(), rand.nextBoolean())
         }
 
         @Test
         fun `test BooleanProperty flip extension`() {
             val property = SimpleBooleanProperty(false)
-            val value by property.delegation()
+            val value by property.delegate()
             assertFalse(value)
 
             property.flip()
@@ -81,9 +81,9 @@ class PropertyTests {
     }
 
     @Nested
-    inner class IntegerPropertyTests {
+    inner class IntegerPropertyDelegateTests {
         private fun testConfiguration(property: IntegerProperty, first: Int, second: Int) {
-            var delegate by property.delegation()
+            var delegate by property.delegate()
             assertEquals(property.value, delegate)
 
             delegate = first
@@ -95,14 +95,14 @@ class PropertyTests {
 
         @Test
         fun `test SimpleIntegerProperty delegation`() {
-            testConfiguration(SimpleIntegerProperty(), rand.nextInt(), rand.nextInt())
+            testConfiguration(integerProperty(0), rand.nextInt(), rand.nextInt())
         }
     }
 
     @Nested
-    inner class LongPropertyTests {
+    inner class LongPropertyDelegateTests {
         private fun testConfiguration(property: LongProperty, first: Long, second: Long) {
-            var delegate by property.delegation()
+            var delegate by property.delegate()
             assertEquals(property.value, delegate)
 
             delegate = first
@@ -114,14 +114,14 @@ class PropertyTests {
 
         @Test
         fun `test SimpleLongProperty delegation`() {
-            testConfiguration(SimpleLongProperty(), rand.nextLong(), rand.nextLong())
+            testConfiguration(longProperty(0), rand.nextLong(), rand.nextLong())
         }
     }
 
     @Nested
-    inner class DoublePropertyTests {
+    inner class DoublePropertyDelegateTests {
         private fun testConfiguration(property: DoubleProperty, first: Double, second: Double) {
-            var delegate by property.delegation()
+            var delegate by property.delegate()
             assertEquals(property.value, delegate)
 
             delegate = first
@@ -133,14 +133,14 @@ class PropertyTests {
 
         @Test
         fun `test SimpleDoubleProperty delegation`() {
-            testConfiguration(SimpleDoubleProperty(), rand.nextDouble(), rand.nextDouble())
+            testConfiguration(doubleProperty(0.0), rand.nextDouble(), rand.nextDouble())
         }
     }
 
     @Nested
-    inner class FloatPropertyTests {
+    inner class FloatPropertyDelegateTests {
         private fun testConfiguration(property: FloatProperty, first: Float, second: Float) {
-            var delegate by property.delegation()
+            var delegate by property.delegate()
             assertEquals(property.value, delegate)
 
             delegate = first
@@ -152,7 +152,7 @@ class PropertyTests {
 
         @Test
         fun `test SimpleFloatProperty delegation`() {
-            testConfiguration(SimpleFloatProperty(), rand.nextFloat(), rand.nextFloat())
+            testConfiguration(floatProperty(0F), rand.nextFloat(), rand.nextFloat())
         }
     }
 }

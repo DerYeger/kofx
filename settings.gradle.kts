@@ -1,1 +1,1 @@
-rootProject.name = "kotlin.javafx"
+rootProject.name = "kofx"

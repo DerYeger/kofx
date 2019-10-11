@@ -1,5 +1,6 @@
-package eu.yeger.kotlin.javafx
+package eu.yeger.kofx
 
+import eu.yeger.kofx.fragment.*
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.scene.control.Button
 import javafx.scene.control.Label

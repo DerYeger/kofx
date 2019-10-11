@@ -1,13 +1,13 @@
-package eu.yeger.kotlin.javafx
+package eu.yeger.kofx.fragment
 
+import eu.yeger.kofx.FXMarker
+import eu.yeger.kofx.control.IntegerField
+import javafx.beans.property.IntegerProperty
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.StringProperty
 import javafx.beans.value.ObservableValue
 import javafx.scene.Node
-import javafx.scene.control.Button
-import javafx.scene.control.Label
-import javafx.scene.control.PasswordField
-import javafx.scene.control.TextField
+import javafx.scene.control.*
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.GridPane
@@ -118,6 +118,31 @@ inline fun passwordField(
     }
 
 // ===============================================================
+// NumberField
+
+inline fun numberField(crossinline init: @FXMarker IntegerField.() -> Unit = {}) =
+    Fragment { IntegerField().apply(init) }
+
+inline fun numberField(property: IntegerProperty, crossinline init: @FXMarker IntegerField.() -> Unit = {}) =
+    Fragment {
+        IntegerField().apply {
+            valueProperty.bindBidirectional(property)
+            init()
+        }
+    }
+
+inline fun numberField(
+    observable: ObservableValue<Int>,
+    crossinline init: @FXMarker IntegerField.() -> Unit = {}
+) =
+    Fragment {
+        IntegerField().apply {
+            valueProperty.bind(observable)
+            init()
+        }
+    }
+
+// ===============================================================
 // ImageView
 
 inline fun imageView(crossinline init: @FXMarker ImageView.() -> Unit = {}) =
@@ -175,7 +200,8 @@ inline fun rectangle(crossinline init: @FXMarker Rectangle.() -> Unit = {}) =
 inline fun rectangle(width: Double, height: Double, crossinline init: @FXMarker Rectangle.() -> Unit = {}) =
     Fragment { Rectangle(width, height).apply(init) }
 
-inline fun rectangle(size: Double, crossinline init: @FXMarker Rectangle.() -> Unit = {}) = rectangle(size, size, init)
+inline fun rectangle(size: Double, crossinline init: @FXMarker Rectangle.() -> Unit = {}) =
+    rectangle(size, size, init)
 
 // ===============================================================
 // HBox

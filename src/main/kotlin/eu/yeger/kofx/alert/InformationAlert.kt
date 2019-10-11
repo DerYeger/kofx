@@ -1,6 +1,10 @@
-package eu.yeger.kotlin.javafx.alert
+package eu.yeger.kofx.alert
 
-import eu.yeger.kotlin.javafx.*
+import eu.yeger.kofx.*
+import eu.yeger.kofx.fragment.asSingletonFragment
+import eu.yeger.kofx.fragment.child
+import eu.yeger.kofx.fragment.label
+import eu.yeger.kofx.fragment.vBox
 import javafx.event.ActionEvent
 import javafx.geometry.Insets
 import javafx.geometry.Pos
