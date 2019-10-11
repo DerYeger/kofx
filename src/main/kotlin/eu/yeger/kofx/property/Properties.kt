@@ -10,10 +10,9 @@ fun <T> Property<T>.delegate() = PropertyDelegate(this.value)
 
 fun <T> objectProperty(initialValue: T) = PropertyDelegate(initialValue)
 
-class PropertyDelegate<T>(
-    initialValue: T? = null,
-    private val delegate: Property<T> = SimpleObjectProperty<T>(initialValue)
-) : Property<T> by delegate {
+class PropertyDelegate<T>(private val delegate: Property<T>) : Property<T> by delegate {
+
+    constructor(initialValue: T? = null) : this(SimpleObjectProperty<T>(initialValue))
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
         delegate.value = value
