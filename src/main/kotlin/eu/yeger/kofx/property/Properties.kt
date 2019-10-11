@@ -33,6 +33,8 @@ fun Property<Boolean>.flipped(): Boolean {
     return value
 }
 
+fun Property<Boolean>.delegate() = BooleanPropertyDelegate(this)
+
 fun booleanProperty(initialValue: Boolean = false) = BooleanPropertyDelegate(initialValue)
 
 class BooleanPropertyDelegate(delegate: Property<Boolean>) : Property<Boolean> by delegate {
@@ -104,6 +106,8 @@ class FloatPropertyDelegate(initialValue: Float = 0F) : SimpleFloatProperty(init
 
 // ===============================================================
 // StringProperty
+
+fun Property<String>.delegate() = StringPropertyDelegate(this)
 
 fun stringProperty(initialValue: String? = null) = StringPropertyDelegate(initialValue)
 
