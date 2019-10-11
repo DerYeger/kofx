@@ -1,6 +1,5 @@
 package eu.yeger.kofx.control
 
-import eu.yeger.kofx.property.delegate
 import eu.yeger.kofx.property.integerProperty
 import javafx.beans.binding.Bindings
 import javafx.scene.control.TextField
@@ -9,7 +8,7 @@ import javafx.util.converter.NumberStringConverter
 class IntegerField : TextField() {
 
     val valueProperty = integerProperty(0)
-    var value by valueProperty.delegate()
+    var value by valueProperty
 
     var maxValue = Int.MAX_VALUE
         set(value) {

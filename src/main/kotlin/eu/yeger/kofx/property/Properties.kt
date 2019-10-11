@@ -6,25 +6,24 @@ import kotlin.reflect.KProperty
 // ===============================================================
 // Property
 
-fun <T> objectProperty(initialValue: T) = SimpleObjectProperty<T>(initialValue)
-fun <T> objectPropertyDelegate(initialValue: T) = SimpleObjectProperty<T>(initialValue).delegate()
+fun <T> Property<T>.delegate() = PropertyDelegate(this.value)
 
-fun <T> Property<T>.delegate() = PropertyDelegate(this)
+fun <T> objectProperty(initialValue: T) = PropertyDelegate(initialValue)
 
-class PropertyDelegate<T>(private val property: Property<T>) {
+class PropertyDelegate<T>(
+    initialValue: T? = null,
+    private val delegate: Property<T> = SimpleObjectProperty<T>(initialValue)
+) : Property<T> by delegate {
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
-        this.property.value = value
+        delegate.value = value
     }
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): T = this.property.value
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): T = delegate.value
 }
 
 // ===============================================================
 // BooleanProperty
-
-fun booleanProperty(initialValue: Boolean) = SimpleBooleanProperty(initialValue)
-fun booleanPropertyDelegate(initialValue: Boolean) = SimpleBooleanProperty(initialValue).delegate()
 
 fun BooleanProperty.flip() {
     value = value.not()
@@ -35,87 +34,83 @@ fun BooleanProperty.flipped(): Boolean {
     return value
 }
 
-fun BooleanProperty.delegate() = BooleanPropertyDelegate(this)
+fun booleanProperty(initialValue: Boolean) = BooleanPropertyDelegate(initialValue)
 
-class BooleanPropertyDelegate(private val property: BooleanProperty) {
+class BooleanPropertyDelegate(initialValue: Boolean) : SimpleBooleanProperty(initialValue) {
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Boolean) {
-        this.property.value = value
+        this.value = value
     }
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): Boolean = this.property.value
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): Boolean = value
 }
 
 // ===============================================================
 // IntegerProperty
 
-fun integerProperty(initialValue: Int) = SimpleIntegerProperty(initialValue)
-fun integerPropertyDelegate(initialValue: Int) = SimpleIntegerProperty(initialValue).delegate()
+fun integerProperty(initialValue: Int) = IntegerPropertyDelegate(initialValue)
 
-fun IntegerProperty.delegate() = IntegerPropertyDelegate(this)
-
-class IntegerPropertyDelegate(private val property: IntegerProperty) {
+class IntegerPropertyDelegate(initialValue: Int) : SimpleIntegerProperty(initialValue) {
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
-        this.property.value = value
+        this.value = value
     }
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): Int = this.property.value
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): Int = value
 }
 
 // ===============================================================
 // LongProperty
 
-fun longProperty(initialValue: Long) = SimpleLongProperty(initialValue)
-fun longPropertyDelegate(initialValue: Long) = SimpleLongProperty(initialValue).delegate()
+fun longProperty(initialValue: Long) = LongPropertyDelegate(initialValue)
 
-fun LongProperty.delegate() = LongPropertyDelegate(this)
-
-class LongPropertyDelegate(private val property: LongProperty) {
+class LongPropertyDelegate(initialValue: Long) : SimpleLongProperty(initialValue) {
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Long) {
-        this.property.value = value
+        this.value = value
     }
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): Long = this.property.value
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): Long = value
 }
 
 // ===============================================================
 // DoubleProperty
 
-fun doubleProperty(initialValue: Double) = SimpleDoubleProperty(initialValue)
-fun doublePropertyDelegate(initialValue: Double) = SimpleDoubleProperty(initialValue).delegate()
+fun doubleProperty(initialValue: Double) = DoublePropertyDelegate(initialValue)
 
-fun DoubleProperty.delegate() = DoublePropertyDelegate(this)
-
-class DoublePropertyDelegate(private val property: DoubleProperty) {
+class DoublePropertyDelegate(initialValue: Double) : SimpleDoubleProperty(initialValue) {
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Double) {
-        this.property.value = value
+        this.value = value
     }
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): Double = this.property.value
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): Double = value
 }
 
 // ===============================================================
 // FloatProperty
 
-fun floatProperty(initialValue: Float) = SimpleFloatProperty(initialValue)
-fun floatPropertyDelegate(initialValue: Float) = SimpleFloatProperty(initialValue).delegate()
+fun floatProperty(initialValue: Float) = FloatPropertyDelegate(initialValue)
 
-fun FloatProperty.delegate() = FloatPropertyDelegate(this)
-
-class FloatPropertyDelegate(private val property: FloatProperty) {
+class FloatPropertyDelegate(initialValue: Float) : SimpleFloatProperty(initialValue) {
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Float) {
-        this.property.value = value
+        this.value = value
     }
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): Float = this.property.value
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): Float = value
 }
 
 // ===============================================================
 // StringProperty
 
-fun stringProperty(initialValue: String?) = SimpleStringProperty(initialValue)
-fun stringPropertyDelegate(initialValue: String) = SimpleStringProperty(initialValue).delegate()
+fun stringProperty(initialValue: String?) = StringPropertyDelegate(initialValue)
+
+class StringPropertyDelegate(initialValue: String?) : SimpleStringProperty(initialValue) {
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String?) {
+        this.value = value
+    }
+
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): String? = value
+}
