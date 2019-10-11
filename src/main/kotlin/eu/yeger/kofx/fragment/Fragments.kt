@@ -118,12 +118,12 @@ inline fun passwordField(
     }
 
 // ===============================================================
-// NumberField
+// IntegerField
 
-inline fun numberField(crossinline init: @FXMarker IntegerField.() -> Unit = {}) =
+inline fun integerField(crossinline init: @FXMarker IntegerField.() -> Unit = {}) =
     Fragment { IntegerField().apply(init) }
 
-inline fun numberField(property: IntegerProperty, crossinline init: @FXMarker IntegerField.() -> Unit = {}) =
+inline fun integerField(property: IntegerProperty, crossinline init: @FXMarker IntegerField.() -> Unit = {}) =
     Fragment {
         IntegerField().apply {
             valueProperty.bindBidirectional(property)
@@ -131,7 +131,7 @@ inline fun numberField(property: IntegerProperty, crossinline init: @FXMarker In
         }
     }
 
-inline fun numberField(
+inline fun integerField(
     observable: ObservableValue<Int>,
     crossinline init: @FXMarker IntegerField.() -> Unit = {}
 ) =
