@@ -1,6 +1,5 @@
 package eu.yeger.kofx.fragment
 
-import eu.yeger.kofx.fragment.Fragment
 import javafx.scene.Parent
 import javafx.scene.Scene
 
