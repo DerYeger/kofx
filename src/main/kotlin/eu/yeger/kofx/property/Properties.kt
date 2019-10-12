@@ -33,13 +33,9 @@ fun Property<Boolean>.flipped(): Boolean {
     return value
 }
 
-fun Property<Boolean>.delegate() = BooleanPropertyDelegate(this)
-
 fun booleanProperty(initialValue: Boolean = false) = BooleanPropertyDelegate(initialValue)
 
-class BooleanPropertyDelegate(delegate: Property<Boolean>) : Property<Boolean> by delegate {
-
-    constructor(initialValue: Boolean = false) : this(SimpleBooleanProperty(initialValue))
+class BooleanPropertyDelegate(initialValue: Boolean = false) : SimpleBooleanProperty(initialValue) {
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Boolean) {
         this.value = value
