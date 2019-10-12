@@ -1,6 +1,5 @@
 package eu.yeger.kofx.fragment
 
-import eu.yeger.kofx.FXMarker
 import javafx.scene.Node
 import javafx.scene.layout.GridPane
 import javafx.scene.layout.Pane

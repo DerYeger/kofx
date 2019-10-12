@@ -1,4 +1,4 @@
-package eu.yeger.kofx
+package eu.yeger.kofx.extension
 
 import eu.yeger.kofx.fragment.label
 import eu.yeger.kofx.property.flip

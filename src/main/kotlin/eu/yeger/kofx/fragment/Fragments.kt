@@ -1,6 +1,5 @@
 package eu.yeger.kofx.fragment
 
-import eu.yeger.kofx.FXMarker
 import eu.yeger.kofx.control.IntegerField
 import javafx.beans.property.IntegerProperty
 import javafx.beans.property.ObjectProperty

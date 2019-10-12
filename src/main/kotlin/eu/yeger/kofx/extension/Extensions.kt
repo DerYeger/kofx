@@ -1,4 +1,4 @@
-package eu.yeger.kofx
+package eu.yeger.kofx.extension
 
 import javafx.beans.value.ObservableValue
 import javafx.css.Styleable

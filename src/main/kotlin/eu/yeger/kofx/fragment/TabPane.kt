@@ -1,6 +1,5 @@
 package eu.yeger.kofx.fragment
 
-import eu.yeger.kofx.FXMarker
 import javafx.geometry.Insets
 import javafx.geometry.Side
 import javafx.scene.Node
