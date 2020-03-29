@@ -3,7 +3,7 @@ version = "0.3.0"
 
 val javaVersion = JavaVersion.VERSION_12
 
-val junit5Version = "5.5.2"
+val junit5Version = "5.6.1"
 val testFXVersion = "4.0.16-alpha"
 val monocleVersion = "jdk-12.0.1+2"
 val mockkVersion = "1.9.3"
