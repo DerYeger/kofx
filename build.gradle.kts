@@ -6,7 +6,7 @@ val javaVersion = JavaVersion.VERSION_12
 val junit5Version = "5.6.2"
 val testFXVersion = "4.0.16-alpha"
 val monocleVersion = "1.8.0_20"
-val mockkVersion = "1.9.3"
+val mockkVersion = "1.10.0"
 
 plugins {
     java
