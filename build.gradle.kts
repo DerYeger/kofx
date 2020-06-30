@@ -13,7 +13,7 @@ plugins {
     jacoco
     maven
     kotlin("jvm") version "1.3.50"
-    id("org.openjfx.javafxplugin") version "0.0.8"
+    id("org.openjfx.javafxplugin") version "0.0.9"
 }
 
 java {
