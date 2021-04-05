@@ -1,7 +1,7 @@
 # kofx
 
 [![License](https://img.shields.io/github/license/deryeger/kofx?color=green&style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![Travis](https://img.shields.io/travis/com/deryeger/kofx?color=green&style=for-the-badge)](https://travis-ci.com/DerYeger/kofx)
+[![Travis](https://img.shields.io/travis/com/deryeger/kofx/develop?color=green&style=for-the-badge)](https://travis-ci.com/DerYeger/kofx)
 [![JitPack](https://img.shields.io/jitpack/v/github/deryeger/kofx?color=green&style=for-the-badge)](https://jitpack.io/#eu.yeger/kofx)
 
 A library for easier and better JavaFX development in combination with Kotlin.
